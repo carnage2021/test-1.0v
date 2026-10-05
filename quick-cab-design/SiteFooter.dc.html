@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer id="contact" style="position:relative;background:#161616;border-top:1px solid rgba(255,187,3,0.35);box-shadow:0 -1px 40px rgba(255,187,3,0.10);color:#D6D6D6;font-family:'Poppins',system-ui,sans-serif;font-size:15px;line-height:1.6">
+  <div style="max-width:1248px;margin:0 auto;padding:72px 24px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:48px 40px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <img src="assets/quick-cab-logo.png" width="122" height="60" alt="The Quick Cab – Intercity Expert" style="display:block;width:122px;height:60px;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,0.08)"></img>
+      <p style="margin:0;max-width:300px;text-wrap:pretty">One way, round trip and rental cabs from Vadodara since 2016. Running 24x7 across Gujarat and beyond.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <a href="#ios" style="height:44px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.16);color:#FFFFFF;display:flex;align-items:center;gap:8px;text-decoration:none;font-size:13px;font-weight:600" style-hover="border-color:#FFBB03">App Store</a>
+        <a href="#android" style="height:44px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.16);color:#FFFFFF;display:flex;align-items:center;gap:8px;text-decoration:none;font-size:13px;font-weight:600" style-hover="border-color:#FFBB03">Google Play</a>
+      </div>
+    </div>
+    <nav aria-label="Quick links">
+      <h2 style="margin:0 0 16px;font:700 14px/1 'Poppins',sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#FFFFFF">Quick links</h2>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <a href="Home.dc.html#book" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Book a one way cab</a>
+        <a href="Routes.dc.html" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Routes and fares</a>
+        <a href="Routes.dc.html#local" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Local rental packages</a>
+        <a href="Airport.dc.html" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Vadodara airport taxi</a>
+        <a href="Reviews.dc.html" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Customer reviews</a>
+        <a href="FAQ.dc.html" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">FAQ</a>
+        <a href="Blog.dc.html" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">Travel blog</a>
+      </div>
+    </nav>
+    <nav aria-label="Popular routes">
+      <h2 style="margin:0 0 16px;font:700 14px/1 'Poppins',sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#FFFFFF">Popular routes</h2>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ routes }}" as="r" hint-placeholder-count="7">
+          <a href="{{ r.href }}" style="color:#D6D6D6;text-decoration:none;padding:6px 0" style-hover="color:#FFBB03">{{ r.title }}</a>
+        </sc-for>
+      </div>
+    </nav>
+    <div>
+      <h2 style="margin:0 0 16px;font:700 14px/1 'Poppins',sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:#FFFFFF">Contact</h2>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a href="tel:+916356544544" style="color:#FFFFFF;text-decoration:none;font:700 22px/1.2 'Poppins',sans-serif;font-variant-numeric:tabular-nums" style-hover="color:#FFBB03">6356-544-544</a>
+        <span style="font-size:14px">Call or WhatsApp, 24x7</span>
+        <a href="mailto:info@thequickcab.com" style="color:#D6D6D6" style-hover="color:#FFBB03">info@thequickcab.com</a>
+        <span style="font-size:14px">Vadodara, Gujarat, India</span>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <a href="#instagram" aria-label="The Quick Cab on Instagram" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);display:grid;place-items:center;color:#FFFFFF" style-hover="border-color:#FFBB03"><qc-icon name="instagram" size="18" style="color:currentColor"></qc-icon></a>
+          <a href="#facebook" aria-label="The Quick Cab on Facebook" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);display:grid;place-items:center;color:#FFFFFF" style-hover="border-color:#FFBB03"><qc-icon name="facebook" size="18" style="color:currentColor"></qc-icon></a>
+          <a href="#youtube" aria-label="The Quick Cab on YouTube" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,0.16);display:grid;place-items:center;color:#FFFFFF" style-hover="border-color:#FFBB03"><qc-icon name="youtube" size="18" style="color:currentColor"></qc-icon></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1248px;margin:0 auto;padding:24px 24px 32px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:12px 24px;font-size:14px">
+    <span>© 2016–2026 The Quick Cab</span>
+    <span style="flex:1"></span>
+    <a href="#terms" style="color:#D6D6D6" style-hover="color:#FFBB03">Terms</a>
+    <a href="#privacy" style="color:#D6D6D6" style-hover="color:#FFBB03">Privacy</a>
+    <a href="#invoice" style="color:#D6D6D6" style-hover="color:#FFBB03">Request Invoice</a>
+  </div>
+  <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+    <div style="height:80px"></div>
+    <div role="region" aria-label="Quick actions" style="position:fixed;left:0;right:0;bottom:0;z-index:60;background:#FFFFFF;border-top:1px solid #ECECEC;box-shadow:0 -6px 24px rgba(20,20,20,0.08);padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px">
+      <a href="tel:+916356544544" style="height:52px;border-radius:999px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:15px;text-decoration:none"><qc-icon name="phone" size="18" style="color:currentColor"></qc-icon>Call</a>
+      <a href="https://wa.me/916356544544" style="height:52px;border-radius:999px;border:1.5px solid #0E9F6E;color:#0B6F4D;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:15px;text-decoration:none"><qc-icon name="message-circle" size="18" style="color:currentColor"></qc-icon>WhatsApp</a>
+      <a href="{{ bookHref }}" style="height:52px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;text-decoration:none">{{ bookLabel }}</a>
+    </div>
+  </sc-if>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;520px&quot;},&quot;bookHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Home.dc.html#book&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bookLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Book&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hideBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { w: window.innerWidth };
+  componentDidMount() {
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+    const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const QC = window.QC;
+    return {
+      routes: QC ? QC.routes.slice(0, 8) : [],
+      mobile: this.state.w < 768 && !this.props.hideBar,
+      bookHref: this.props.bookHref || 'Home.dc.html#book',
+      bookLabel: this.props.bookLabel || 'Book'
+    };
+  }
+}
+</script>
+</body>
+</html>

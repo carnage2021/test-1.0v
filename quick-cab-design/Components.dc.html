@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Quick Cab – Components and tokens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+    summary::-webkit-details-marker{display:none}
+    details[open] .chev{transform:rotate(180deg)}
+  </style>
+</helmet>
+<main style="max-width:1248px;margin:0 auto;padding:48px 24px 96px;display:flex;flex-direction:column;gap:64px">
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <img src="assets/quick-cab-logo.png" width="122" height="60" alt="The Quick Cab – Intercity Expert" style="width:122px;height:60px;border-radius:12px"></img>
+    <h1 style="margin:12px 0 0;font:700 clamp(30px,4vw,48px)/1.1 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Components and design tokens</h1>
+    <p style="margin:0;font-size:17px">The Quick Cab website, v1. All pages: <a href="Home.dc.html">Home</a> · <a href="Route.dc.html">Route</a> · <a href="Routes.dc.html">Routes</a> · <a href="Airport.dc.html">Airport</a> · <a href="Booking.dc.html">Booking</a> · <a href="Reviews.dc.html">Reviews</a> · <a href="FAQ.dc.html">FAQ</a> · <a href="Blog.dc.html">Blog</a> · <a href="Article.dc.html">Article</a></p>
+  </header>
+
+  <section aria-labelledby="t-col" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="t-col" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Colour</h2>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px">
+      <sc-for list="{{ colors }}" as="c" hint-placeholder-count="12">
+        <li style="border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;overflow:hidden">
+          <div style="height:72px;background:{{ c.hex }};border-bottom:1px solid #ECECEC"></div>
+          <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px"><strong style="color:#1E1E1E;font-size:14px">{{ c.name }}</strong><code style="font-size:13px;color:#3A3A3A">{{ c.hex }}</code><span style="font-size:12px;color:#6E6E6E">{{ c.use }}</span></div>
+        </li>
+      </sc-for>
+    </ul>
+  </section>
+
+  <section aria-labelledby="t-type" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="t-type" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Type</h2>
+    <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{ type }}" as="t" hint-placeholder-count="7">
+        <div style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:baseline;border-bottom:1px solid #F0F0F0;padding-bottom:12px">
+          <code style="font-size:12px;color:#6E6E6E">{{ t.meta }}</code>
+          <span style="font-family:{{ t.family }};font-weight:{{ t.weight }};font-size:{{ t.size }};line-height:1.15;color:#1E1E1E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.sample }}</span>
+        </div>
+      </sc-for>
+      <p style="margin:0;font-size:14px">Poppins throughout: headings 600/700, body 400/500 · fares and phone numbers use <code>font-variant-numeric: tabular-nums</code> · mobile H1 32px.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-shape" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="t-shape" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Shape, spacing, elevation</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+      <div style="padding:20px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:12px"><strong style="color:#1E1E1E">Radius</strong><div style="display:flex;gap:10px;align-items:end"><span style="width:56px;height:56px;border-radius:16px;background:#ECECEC"></span><span style="width:56px;height:48px;border-radius:12px;background:#ECECEC"></span><span style="width:80px;height:44px;border-radius:999px;background:#ECECEC"></span></div><span style="font-size:13px">Cards 16 · inputs 12 · buttons and pills full</span></div>
+      <div style="padding:20px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:12px"><strong style="color:#1E1E1E">Spacing (8px grid)</strong><div style="display:flex;gap:6px;align-items:end"><span style="width:8px;height:8px;background:#FFBB03"></span><span style="width:16px;height:16px;background:#FFBB03"></span><span style="width:24px;height:24px;background:#FFBB03"></span><span style="width:32px;height:32px;background:#FFBB03"></span><span style="width:48px;height:48px;background:#FFBB03"></span><span style="width:64px;height:64px;background:#FFBB03"></span></div><span style="font-size:13px">8 · 16 · 24 · 32 · 48 · 64 · 96 section · 12-col grid · max width 1200</span></div>
+      <div style="padding:20px;border-radius:16px;background:#FFFFFF;box-shadow:0 12px 40px rgba(20,20,20,0.08),0 2px 6px rgba(20,20,20,0.04);display:flex;flex-direction:column;gap:12px"><strong style="color:#1E1E1E">Shadow</strong><code style="font-size:12px;color:#3A3A3A">0 12px 40px rgba(20,20,20,.08)</code><span style="font-size:13px">Booking widget, hovered cards. Everything else uses a 1px #ECECEC border.</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-btn" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-btn" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Buttons</h2>
+    <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Primary · default</span><span style="height:52px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font:700 16px 'Poppins',sans-serif">Check Fare</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Primary · hover</span><span style="height:52px;border-radius:999px;background:#E5A500;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font:700 16px 'Poppins',sans-serif">Check Fare</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Primary · focus</span><span style="height:52px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font:700 16px 'Poppins',sans-serif;outline:3px solid #3A3A3A;outline-offset:3px">Check Fare</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Primary · loading</span><span style="height:52px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;gap:8px;font:700 16px 'Poppins',sans-serif;opacity:0.8"><qc-icon name="loader-circle" size="18"></qc-icon>Checking fares…</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Secondary (navy fill)</span><span style="height:52px;border-radius:999px;background:#1E1E1E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600"><qc-icon name="phone" size="18"></qc-icon>Call 6356-544-544</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Outline</span><span style="height:52px;border-radius:999px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font-weight:600">Change car</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">WhatsApp</span><span style="height:52px;border-radius:999px;border:1.5px solid #0E9F6E;color:#0B6F4D;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600"><qc-icon name="message-circle" size="18"></qc-icon>WhatsApp</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">On navy</span><span style="height:52px;border-radius:999px;background:#1E1E1E;padding:4px;display:flex"><span style="flex:1;border-radius:999px;border:1.5px solid #FFFFFF;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:600">WhatsApp</span></span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-in" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-in" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Inputs</h2>
+    <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600;color:#1E1E1E">Default</span><span style="height:52px;border-radius:12px;border:1.5px solid #ECECEC;display:flex;align-items:center;padding:0 14px;color:#6E6E6E">Type a city</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600;color:#1E1E1E">Focus</span><span style="height:52px;border-radius:12px;border:1.5px solid #3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14);display:flex;align-items:center;padding:0 14px;color:#1E1E1E">Ahm|</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600;color:#1E1E1E">Error</span><span style="height:52px;border-radius:12px;border:1.5px solid #D92D20;display:flex;align-items:center;padding:0 14px;color:#1E1E1E">98765</span><span style="font-size:14px;color:#D92D20">Enter a 10-digit mobile number</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:14px;font-weight:600;color:#1E1E1E">Autocomplete open</span><span style="border-radius:12px;border:1px solid #ECECEC;box-shadow:0 16px 40px rgba(20,20,20,0.14);padding:6px;display:flex;flex-direction:column"><span style="min-height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:8px;background:#F4F4F4;color:#1E1E1E">Ahmedabad<small style="color:#6E6E6E">Popular</small></span><span style="min-height:44px;display:flex;align-items:center;padding:0 12px;color:#1E1E1E">Ahmedabad Airport</span></span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-bw" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-bw" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Booking widget</h2>
+    <p style="margin:0;max-width:720px">Live component. Try: empty submit (inline errors, data kept), pick both cities (fare preview), Rental tab (package select), Round Trip (return date). Native date/time pickers on mobile. All targets 48px+.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">layout="card" · filled, with fare preview</span><dc-import name="BookingWidget" uid="cs1" from="Vadodara" to="Surat" hint-size="100%,560px"></dc-import></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">layout="card" · empty (submit to see errors)</span><dc-import name="BookingWidget" uid="cs2" hint-size="100%,440px"></dc-import></div>
+    </div>
+    <span style="font-size:12px;color:#6E6E6E">layout="bar" · hero B, route pages on wide screens</span>
+    <dc-import name="BookingWidget" uid="cs3" layout="bar" from="Vadodara" hint-size="100%,170px"></dc-import>
+  </section>
+
+  <section aria-labelledby="c-cards" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-cards" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Cards and badges</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Route card (whole card is a link)</span>
+        <a href="{{ route.href }}" style="display:flex;flex-direction:column;gap:18px;padding:20px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;text-decoration:none;color:#4A4A4A" style-hover="border-color:#D9D9D9;box-shadow:0 10px 30px rgba(20,20,20,0.08)">
+          <span aria-hidden="true" style="display:flex;align-items:center;gap:8px"><span style="width:9px;height:9px;border-radius:999px;background:#1E1E1E"></span><span style="flex:1;border-top:2px dashed #D9D9D9"></span><span style="width:9px;height:9px;border-radius:999px;background:#FFBB03;box-shadow:0 0 0 2px #1E1E1E"></span></span>
+          <h3 style="margin:0;font:700 18px 'Poppins',sans-serif;color:#1E1E1E">{{ route.title }}</h3>
+          <span style="font-size:14px;color:#6E6E6E">{{ route.km }} km · {{ route.time }} · Sedan</span>
+          <span style="display:flex;align-items:baseline;gap:6px"><span style="font-size:14px;color:#6E6E6E">from</span><span style="font:700 24px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ route.from }}</span></span>
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Review card</span>
+        <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:14px">
+          <span role="img" aria-label="5 out of 5 stars" style="display:flex;gap:2px"><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon></span>
+          <blockquote style="margin:0;font-size:16px;line-height:1.6;color:#1E1E1E">“{{ review.text }}”</blockquote>
+          <span style="font-size:14px"><strong style="color:#1E1E1E">{{ review.name }}</strong> · {{ review.route }}</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#6E6E6E">Badges</span>
+        <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-wrap:wrap;gap:10px">
+          <span style="font:600 11px/1 ui-monospace,Menlo,monospace;color:#6E6E6E;background:#F4F4F4;border-radius:999px;padding:6px 10px">SAMPLE</span>
+          <span style="font:700 12px/1 ui-monospace,Menlo,monospace;color:#B42318;background:#FEF3F2;border:1px solid #FECDCA;border-radius:999px;padding:7px 12px">[CONFIRM WITH CLIENT]</span>
+          <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0B7A55;background:#E7F6F0;border-radius:999px;padding:6px 12px"><qc-icon name="circle-check" size="16" style="color:#0E9F6E"></qc-icon>No return fare</span>
+          <span style="display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:999px;background:#FFFFFF;border:1px solid #ECECEC;font-size:14px;font-weight:600;color:#1E1E1E"><span style="width:8px;height:8px;border-radius:999px;background:#0E9F6E"></span>24x7</span>
+          <span style="font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">H2 · dev annotation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-tab" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-tab" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Fare table and FAQ accordion</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px;align-items:start">
+      <div style="overflow-x:auto;border:1px solid #ECECEC;border-radius:16px;background:#FFFFFF">
+        <table style="width:100%;min-width:400px;border-collapse:collapse;font-size:15px">
+          <thead><tr style="background:#F7F7F5;text-align:left;color:#6E6E6E;font-size:13px"><th scope="col" style="padding:12px 20px;font-weight:600">Car type</th><th scope="col" style="padding:12px;font-weight:600">Seats</th><th scope="col" style="padding:12px;font-weight:600">One way</th><th scope="col" style="padding:12px 20px;font-weight:600">Round trip</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ route.fares }}" as="f" hint-placeholder-count="4">
+              <tr style="border-top:1px solid #ECECEC"><th scope="row" style="padding:14px 20px;text-align:left;font-weight:600;color:#1E1E1E">{{ f.car }}</th><td style="padding:14px 12px">{{ f.seats }}</td><td style="padding:14px 12px;font:700 17px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ f.oneWay }}</td><td style="padding:14px 20px;font-variant-numeric:tabular-nums">{{ f.round }}</td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="3">
+          <details style="background:#FFFFFF;border:1px solid #ECECEC;border-radius:12px">
+            <summary style="list-style:none;cursor:pointer;min-height:60px;padding:0 20px;display:flex;align-items:center;gap:16px"><h3 style="margin:0;flex:1;font:600 17px/1.4 'Poppins',sans-serif;color:#1E1E1E;padding:16px 0">{{ f.q }}</h3><qc-icon class="chev" name="chevron-down" size="20" style="color:#6E6E6E;transition:transform .2s"></qc-icon></summary>
+            <p style="margin:0;padding:0 20px 20px;line-height:1.65">{{ f.a }}</p>
+          </details>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-bar" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-bar" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Mobile sticky bar</h2>
+    <p style="margin:0">Fixed to the bottom on every page under 768px. Book label changes per page (e.g. “Book this route”). Hidden inside the booking flow.</p>
+    <div style="max-width:390px;background:#FFFFFF;border:1px solid #ECECEC;border-radius:16px;box-shadow:0 -6px 24px rgba(20,20,20,0.08);padding:10px 12px;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px">
+      <span style="height:52px;border-radius:999px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:15px"><qc-icon name="phone" size="18"></qc-icon>Call</span>
+      <span style="height:52px;border-radius:999px;border:1.5px solid #0E9F6E;color:#0B6F4D;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:15px"><qc-icon name="message-circle" size="18"></qc-icon>WhatsApp</span>
+      <span style="height:52px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px">Book</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="c-hf" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="c-hf" style="margin:0;font:700 28px 'Poppins',sans-serif;color:#1E1E1E">Header and footer</h2>
+    <p style="margin:0">Header collapses to logo, call icon and menu under 1260px. Resize the window to see it.</p>
+    <div style="border-radius:16px;overflow:hidden;border:1px solid #ECECEC"><dc-import name="SiteHeader" active="routes" hint-size="100%,56px"></dc-import></div>
+    <div style="border-radius:16px;overflow:hidden"><dc-import name="SiteFooter" hide-bar="{{ true }}" hint-size="100%,520px"></dc-import></div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() { const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t(); }
+  renderVals() {
+    const colors = [
+      ['Charcoal 950', '#161616', 'Hero, page bands, footer'], ['Charcoal 900', '#1E1E1E', 'Headings, dark sections, footer'], ['Graphite 700', '#3A3A3A', 'Secondary dark, hover, links'],
+      ['Yellow 500', '#FFBB03', 'Primary buttons only, Navy text on top'], ['Yellow hover', '#E5A500', 'Primary button hover'],
+      ['Background', '#F7F7F5', 'Page'], ['Surface', '#FFFFFF', 'Cards, inputs'], ['Border', '#ECECEC', 'Dividers, card borders'],
+      ['Text', '#4A4A4A', 'Body copy'], ['Secondary text', '#6E6E6E', 'Meta, captions'], ['Success', '#0E9F6E', 'Included, WhatsApp'], ['Glass', 'rgba(255,255,255,0.07)', 'Cards on dark + 1px white/14% border + blur'], ['Error', '#D92D20', 'Validation']
+    ].map(([name, hex, use]) => ({ name, hex, use }));
+    const J = "'Poppins',sans-serif", I = "'Poppins',sans-serif";
+    const type = [
+      ['56 / 800 · H1', J, 800, '56px', 'One way cab service'], ['44 / 800 · H2 large', J, 800, '44px', 'Popular routes'], ['32 / 800 · H2', J, 800, '32px', 'What’s included'],
+      ['24 / 700 · H3 / fare', J, 700, '24px', '₹1,999 one way'], ['18 / 500 · lead', I, 500, '18px', 'Book intercity cabs from Vadodara, 24x7.'],
+      ['16 / 400 · body', I, 400, '16px', 'Your driver waits at the arrivals exit.'], ['14 / 500 · meta', I, 500, '14px', '112 km · about 2 hr · Sedan']
+    ].map(([meta, family, weight, size, sample]) => ({ meta, family, weight, size, sample }));
+    return { colors, type, faqs: window.QC ? window.QC.faqs.slice(0, 3) : [], route: window.QC ? window.QC.routes[0] : { fares: [] }, review: window.QC ? window.QC.reviews[0] : {} };
+  }
+}
+</script>
+</body>
+</html>

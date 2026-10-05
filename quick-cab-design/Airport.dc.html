@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Vadodara Airport Taxi | Pickup and Drop 24x7 | The Quick Cab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+    summary::-webkit-details-marker{display:none}
+    details[open] .chev{transform:rotate(180deg)}
+  </style>
+</helmet>
+<dc-import name="SiteHeader" style="position:sticky;top:-24px;z-index:50" hint-size="100%,56px"></dc-import>
+<main>
+  <section id="book" aria-labelledby="h1" style="position:relative;isolation:isolate;background:#161616;color:#D6D6D6">
+    <dc-import name="NightBackdrop" variant="band" style="position:absolute;inset:0;z-index:-1" hint-size="100%,100%"></dc-import>
+    <div style="max-width:1248px;margin:0 auto;padding:68px 24px clamp(48px,6vw,88px)">
+      <nav aria-label="Breadcrumb" style="padding:20px 0 0">
+        <ol style="list-style:none;margin:0;padding:0;display:flex;gap:8px;font-size:14px;color:#B5B5B5">
+          <li><a href="Home.dc.html" style="color:#B5B5B5">Home</a></li><li aria-hidden="true">/</li>
+          <li aria-current="page" style="color:#FFFFFF;font-weight:500">Vadodara Airport Taxi</li>
+        </ol>
+      </nav>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px clamp(28px,5vw,72px);align-items:center;padding-top:32px">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <sc-if value="{{ ann }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">H1 · widget pre-filled with Vadodara Airport</span></sc-if>
+          <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(12px);font-size:14px;font-weight:600;color:#FFFFFF"><qc-icon name="plane" size="16"></qc-icon>Harni Airport (BDQ)</span>
+          <h1 id="h1" style="margin:0;font:700 clamp(30px,4.2vw,52px)/1.08 'Poppins',sans-serif;letter-spacing:-0.02em;color:#FFFFFF;text-wrap:balance">Vadodara Airport Taxi — Pickup and Drop, 24x7</h1>
+          <p style="margin:0;font-size:17px;line-height:1.6;max-width:500px">Fixed fares to and from Vadodara Airport. Share your flight number and your driver tracks the arrival.</p>
+        </div>
+        <div style="padding:10px;border-radius:26px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(18px);box-shadow:0 40px 100px rgba(0,0,0,0.45)"><dc-import name="BookingWidget" uid="air" from="Vadodara Airport" hint-size="100%,440px"></dc-import></div>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width:1248px;margin:0 auto;padding:clamp(56px,8vw,96px) 24px;display:flex;flex-direction:column;gap:72px">
+    <section aria-labelledby="af-h" style="display:flex;flex-direction:column;gap:16px">
+      <h2 id="af-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Airport transfer fares</h2>
+      <div style="overflow-x:auto;border:1px solid #ECECEC;border-radius:16px;background:#FFFFFF">
+        <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:15px">
+          <caption style="text-align:left;padding:14px 20px;font-size:13px;color:#6E6E6E;border-bottom:1px solid #ECECEC">Sample fares in INR from Vadodara Airport, one way.</caption>
+          <thead><tr style="background:#F7F7F5;text-align:left;color:#6E6E6E;font-size:13px"><th scope="col" style="padding:12px 20px;font-weight:600">To</th><th scope="col" style="padding:12px;font-weight:600">Distance</th><th scope="col" style="padding:12px;font-weight:600">Sedan</th><th scope="col" style="padding:12px 20px;font-weight:600">SUV</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ air }}" as="a" hint-placeholder-count="5">
+              <tr style="border-top:1px solid #ECECEC"><th scope="row" style="padding:16px 20px;text-align:left;font-weight:600;color:#1E1E1E">{{ a.to }}</th><td style="padding:16px 12px;font-variant-numeric:tabular-nums">{{ a.km }} km</td><td style="padding:16px 12px;font-weight:700;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ a.sedan }}</td><td style="padding:16px 20px;font-variant-numeric:tabular-nums">{{ a.suv }}</td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="ap-h" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:32px 64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <h2 id="ap-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">How airport pickup works</h2>
+        <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+          <li style="display:flex;gap:16px"><span style="width:36px;height:36px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center;font:700 15px 'Poppins',sans-serif;flex:none">1</span><div><h3 style="margin:0 0 4px;font:700 17px 'Poppins',sans-serif;color:#1E1E1E">Add your flight number</h3><p style="margin:0;line-height:1.6">We track delays, so the pickup moves with your flight.</p></div></li>
+          <li style="display:flex;gap:16px"><span style="width:36px;height:36px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center;font:700 15px 'Poppins',sans-serif;flex:none">2</span><div><h3 style="margin:0 0 4px;font:700 17px 'Poppins',sans-serif;color:#1E1E1E">Get driver details</h3><p style="margin:0;line-height:1.6">Name, phone and car number arrive by SMS and WhatsApp.</p></div></li>
+          <li style="display:flex;gap:16px"><span style="width:36px;height:36px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center;font:700 15px 'Poppins',sans-serif;flex:none">3</span><div><h3 style="margin:0 0 4px;font:700 17px 'Poppins',sans-serif;color:#1E1E1E">Meet at arrivals</h3><p style="margin:0;line-height:1.6">Your driver waits at the arrivals exit with a name board. [CONFIRM WITH CLIENT]</p></div></li>
+        </ol>
+      </div>
+      <div role="img" aria-label="Quick Cab driver waiting at Vadodara Airport arrivals" style="aspect-ratio:4 / 3;border-radius:16px;border:1px solid #ECECEC;background:repeating-linear-gradient(135deg,#F0F0F0 0 8px,#F7F7F5 8px 16px);display:grid;place-items:center;font:500 12px ui-monospace,Menlo,monospace;color:#6E6E6E">driver photo at arrivals · 960×720 · lazy</div>
+    </section>
+
+    <section aria-labelledby="afaq-h" style="max-width:880px;display:flex;flex-direction:column;gap:16px">
+      <h2 id="afaq-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Airport transfer FAQs</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="3">
+          <details style="background:#FFFFFF;border:1px solid #ECECEC;border-radius:12px">
+            <summary style="list-style:none;cursor:pointer;min-height:60px;padding:0 20px;display:flex;align-items:center;gap:16px"><h3 style="margin:0;flex:1;font:600 17px/1.4 'Poppins',sans-serif;color:#1E1E1E;padding:16px 0">{{ f.q }}</h3><qc-icon class="chev" name="chevron-down" size="20" style="color:#6E6E6E;transition:transform .2s"></qc-icon></summary>
+            <p style="margin:0;padding:0 20px 20px;line-height:1.65">{{ f.a }}</p>
+          </details>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Developer notes&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t(); }
+  renderVals() {
+    const QC = window.QC;
+    const air = QC ? [['Vadodara city (Alkapuri, Sayajigunj)', 8, 499], ['Anand', 45, 1099], ['Bharuch', 80, 1599], ['Statue of Unity', 95, 1999], ['Ahmedabad', 115, 2099]].map(([to, km, s]) => ({ to, km, sedan: QC.inr(s), suv: QC.inr(s * 1.45) })) : [];
+    const faqs = QC ? [QC.faqs[6], { q: 'What if my flight is late?', a: 'Your driver tracks the flight and adjusts the pickup time. Waiting time rules are shown before you confirm. [CONFIRM WITH CLIENT]' }, { q: 'Can I book a drop to the airport for an early flight?', a: 'Yes. We run 24x7, so 3 am and 4 am pickups are normal for us.' }] : [];
+    return { air, faqs, ann: !!this.props.annotations };
+  }
+}
+</script>
+</body>
+</html>

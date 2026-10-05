@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Vadodara to Ahmedabad Taxi | One Way Cab Fare | The Quick Cab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+    summary::-webkit-details-marker{display:none}
+    details[open] .chev{transform:rotate(180deg)}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</helmet>
+<dc-import name="SiteHeader" style="position:sticky;top:-24px;z-index:50" active="routes" hint-size="100%,56px"></dc-import>
+<section style="position:relative;isolation:isolate;background:#161616;color:#D6D6D6;overflow:hidden">
+  <dc-import name="NightBackdrop" variant="band" style="position:absolute;inset:0;z-index:-1" hint-size="100%,100%"></dc-import>
+  <div style="max-width:1248px;margin:0 auto;padding:88px 24px 48px">
+<nav aria-label="Breadcrumb" style="padding:20px 0 0">
+    <ol style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:#B5B5B5">
+      <li><a href="Home.dc.html" style="color:#B5B5B5">Home</a></li><li aria-hidden="true">/</li>
+      <li><a href="Routes.dc.html" style="color:#B5B5B5">Routes &amp; Fares</a></li><li aria-hidden="true">/</li>
+      <li aria-current="page" style="color:#FFFFFF;font-weight:500">{{ r.title }}</li>
+    </ol>
+  </nav>
+  <header style="padding:24px 0 32px;display:flex;flex-direction:column;gap:18px">
+    <sc-if value="{{ ann }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">ROUTE TEMPLATE · H1 dynamic: “Vadodara to {City} Taxi — One Way Cab Fare” · BreadcrumbList schema</span></sc-if>
+    <h1 style="margin:0;font:700 clamp(30px,4vw,52px)/1.08 'Poppins',sans-serif;letter-spacing:-0.02em;color:#FFFFFF;max-width:860px;text-wrap:balance">{{ h1 }}</h1>
+    <dl style="margin:0;display:flex;flex-wrap:wrap;gap:10px">
+      <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(12px)"><qc-icon name="route" size="17" style="color:#B5B5B5"></qc-icon><dt style="font-size:14px;color:#B5B5B5">Distance</dt><dd style="margin:0;font-weight:600;color:#FFFFFF;font-variant-numeric:tabular-nums">{{ r.km }} km</dd></div>
+      <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(12px)"><qc-icon name="clock" size="17" style="color:#B5B5B5"></qc-icon><dt style="font-size:14px;color:#B5B5B5">Travel time</dt><dd style="margin:0;font-weight:600;color:#FFFFFF">about {{ r.time }}</dd></div>
+      <div style="display:flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(12px)"><qc-icon name="map-pin" size="17" style="color:#B5B5B5"></qc-icon><dt style="font-size:14px;color:#B5B5B5">Via</dt><dd style="margin:0;font-weight:600;color:#FFFFFF">{{ r.via }}</dd></div>
+    </dl>
+  </header>
+  </div>
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,187,3,0.6),transparent)"></div>
+</section>
+<main style="max-width:1248px;margin:0 auto;padding:40px 24px 0">
+  
+
+  <div style="display:grid;gap:40px;align-items:start;padding-bottom:clamp(56px,8vw,96px);grid-template-columns:{{ cols }};grid-template-areas:{{ areas }}">
+    <aside id="widget" aria-label="Book this route" style="grid-area:aside;position:sticky;top:96px;display:flex;flex-direction:column;gap:12px">
+      <dc-import name="BookingWidget" uid="route" from="Vadodara" to="{{ r.to }}" hint-size="100%,520px"></dc-import>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <a href="tel:+916356544544" style="height:48px;border-radius:999px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;text-decoration:none;font-size:15px"><qc-icon name="phone" size="17"></qc-icon>Call</a>
+        <a href="https://wa.me/916356544544" style="height:48px;border-radius:999px;border:1.5px solid #0E9F6E;color:#0B6F4D;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;text-decoration:none;font-size:15px"><qc-icon name="message-circle" size="17"></qc-icon>WhatsApp</a>
+      </div>
+    </aside>
+
+    <div style="grid-area:main;display:flex;flex-direction:column;gap:56px;min-width:0">
+      <section aria-labelledby="fares-h" style="display:flex;flex-direction:column;gap:16px">
+        <sc-if value="{{ ann }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">H2 · real &lt;table&gt; with &lt;th scope&gt; · fares dynamic (SAMPLE) · scrolls horizontally on mobile</span></sc-if>
+        <h2 id="fares-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">{{ r.to }} cab fares from Vadodara</h2>
+        <div style="overflow-x:auto;border:1px solid #ECECEC;border-radius:16px;background:#FFFFFF">
+          <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:15px">
+            <caption style="text-align:left;padding:14px 20px;font-size:13px;color:#6E6E6E;border-bottom:1px solid #ECECEC">Sample fares in INR, including items listed under “What’s included”. Round trip shown for 2 days.</caption>
+            <thead>
+              <tr style="background:#F7F7F5;text-align:left;color:#6E6E6E;font-size:13px">
+                <th scope="col" style="padding:12px 20px;font-weight:600">Car type</th>
+                <th scope="col" style="padding:12px 12px;font-weight:600">Seats</th>
+                <th scope="col" style="padding:12px 12px;font-weight:600">One way</th>
+                <th scope="col" style="padding:12px 12px;font-weight:600">Round trip</th>
+                <th scope="col" style="padding:12px 20px"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Action</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ r.fares }}" as="f" hint-placeholder-count="4">
+                <tr style="border-top:1px solid #ECECEC">
+                  <th scope="row" style="padding:16px 20px;text-align:left;font-weight:600;color:#1E1E1E">{{ f.car }}<div style="font-weight:400;font-size:13px;color:#6E6E6E">{{ f.eg }}</div></th>
+                  <td style="padding:16px 12px;font-variant-numeric:tabular-nums">{{ f.seats }}</td>
+                  <td style="padding:16px 12px;font:700 18px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ f.oneWay }}</td>
+                  <td style="padding:16px 12px;font-variant-numeric:tabular-nums">{{ f.round }}</td>
+                  <td style="padding:12px 20px;text-align:right"><a href="{{ f.href }}" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:10px;background:#FFBB03;color:#1E1E1E;font-weight:700;text-decoration:none;font-size:14px;white-space:nowrap" style-hover="background:#E5A500;color:#1E1E1E">Book {{ f.car }}</a></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="inc-h" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <h2 id="inc-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">What’s included</h2>
+          <span style="font:700 12px/1 ui-monospace,Menlo,monospace;color:#B42318;background:#FEF3F2;border:1px solid #FECDCA;border-radius:999px;padding:7px 12px">[CONFIRM WITH CLIENT]</span>
+        </div>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+          <sc-for list="{{ included }}" as="i" hint-placeholder-count="6">
+            <li style="display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:12px;background:#FFFFFF;border:1px solid #ECECEC;color:#1E1E1E;font-weight:500"><qc-icon name="circle-check" size="20" style="color:#0E9F6E"></qc-icon>{{ i.t }}</li>
+          </sc-for>
+        </ul>
+      </section>
+
+      <section aria-labelledby="notes-h" style="display:flex;flex-direction:column;gap:16px">
+        <h2 id="notes-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Route notes</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+          <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font:700 18px 'Poppins',sans-serif;color:#1E1E1E">Best time to travel</h3>
+            <p style="margin:0;line-height:1.65">{{ notes.time }}</p>
+          </div>
+          <div style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font:700 18px 'Poppins',sans-serif;color:#1E1E1E">Stops on the way</h3>
+            <p style="margin:0;line-height:1.65">{{ notes.stops }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="rfaq-h" style="display:flex;flex-direction:column;gap:16px">
+        <h2 id="rfaq-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Vadodara to {{ r.to }} cab: FAQs</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+            <details style="background:#FFFFFF;border:1px solid #ECECEC;border-radius:12px">
+              <summary style="list-style:none;cursor:pointer;min-height:60px;padding:0 20px;display:flex;align-items:center;gap:16px">
+                <h3 style="margin:0;flex:1;font:600 17px/1.4 'Poppins',sans-serif;color:#1E1E1E;padding:16px 0">{{ f.q }}</h3>
+                <qc-icon class="chev" name="chevron-down" size="20" style="color:#6E6E6E;transition:transform .2s"></qc-icon>
+              </summary>
+              <p style="margin:0;padding:0 20px 20px;line-height:1.65">{{ f.a }}</p>
+            </details>
+          </sc-for>
+        </div>
+      </section>
+
+      <section aria-labelledby="rel-h" style="display:flex;flex-direction:column;gap:16px">
+        <h2 id="rel-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Related routes</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+          <sc-for list="{{ related }}" as="x" hint-placeholder-count="4">
+            <li><a href="{{ x.href }}" style="display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;text-decoration:none" style-hover="border-color:#D9D9D9;box-shadow:0 10px 30px rgba(20,20,20,0.08)"><span style="font:700 16px 'Poppins',sans-serif;color:#1E1E1E">{{ x.title }}</span><span style="font-size:14px;color:#6E6E6E;font-variant-numeric:tabular-nums">{{ x.km }} km · from {{ x.from }}</span></a></li>
+          </sc-for>
+        </ul>
+      </section>
+    </div>
+  </div>
+</main>
+<dc-import name="SiteFooter" book-href="#widget" book-label="Book this route" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;route&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ahmedabad&quot;,&quot;surat&quot;,&quot;statue-of-unity&quot;,&quot;rajkot&quot;,&quot;mumbai&quot;,&quot;ahmedabad-airport&quot;,&quot;dwarka-somnath&quot;,&quot;udaipur&quot;],&quot;default&quot;:&quot;ahmedabad&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Developer notes&quot;}}">
+class Component extends DCLogic {
+  state = { w: window.innerWidth };
+  componentDidMount() {
+    const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t();
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const QC = window.QC;
+    const wide = this.state.w >= 1000;
+    const base = { cols: wide ? 'minmax(0,1fr) 400px' : 'minmax(0,1fr)', areas: wide ? '"main aside"' : '"aside" "main"', ann: !!this.props.annotations };
+    if (!QC) return Object.assign(base, { r: { fares: [] }, included: [], faqs: [], related: [], notes: {}, h1: '' });
+    const slug = new URLSearchParams(location.search).get('to') || this.props.route || 'ahmedabad';
+    const r0 = QC.routes.find(x => x.slug === slug) || QC.routes[0];
+    const r = Object.assign({}, r0, { fares: r0.fares.map(f => Object.assign({}, f, { href: 'Booking.dc.html?trip=oneway&from=Vadodara&to=' + encodeURIComponent(r0.to) + '&car=' + encodeURIComponent(f.car) })) });
+    const notes = slug === 'ahmedabad'
+      ? { time: 'Leave before 8 am or after 8 pm to avoid city traffic at both ends. The Expressway itself moves well all day.', stops: 'The Expressway has food courts near Nadiad. Tell the driver when booking if you want a stop at Anand or Nadiad.' }
+      : { time: 'Early-morning starts avoid city traffic and give you most of the day at ' + r0.to + '.', stops: 'Your driver can stop for tea, food and rest breaks on request. Add any planned stops when you book.' };
+    const faqs = [
+      { q: 'How much is a one way cab from Vadodara to ' + r0.to + '?', a: 'A one way sedan starts from ' + r0.from + ' (sample fare). The exact fare for your car and date shows when you check fare.' },
+      { q: 'How long does Vadodara to ' + r0.to + ' take by cab?', a: 'About ' + r0.time + ' for ' + r0.km + ' km via ' + r0.via + ', depending on traffic.' },
+      { q: 'Do I pay for the return journey?', a: 'No. On a one-way booking you pay for Vadodara to ' + r0.to + ' only.' },
+      { q: 'Can I book a cab from ' + r0.to + ' to Vadodara?', a: 'Yes. Enter ' + r0.to + ' as the pickup city in the booking form, or call 6356-544-544.' }
+    ];
+    return Object.assign(base, {
+      r, notes, faqs, h1: 'Vadodara to ' + r0.to + ' Taxi — One Way Cab Fare',
+      included: QC.included, related: QC.routes.filter(x => x.slug !== slug).slice(0, 4)
+    });
+  }
+}
+</script>
+</body>
+</html>

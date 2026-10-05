@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Cab Routes and Fares from Vadodara | The Quick Cab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  </style>
+</helmet>
+<dc-import name="SiteHeader" style="position:sticky;top:-24px;z-index:50" active="routes" hint-size="100%,56px"></dc-import>
+<section style="position:relative;isolation:isolate;background:#161616;color:#D6D6D6;overflow:hidden">
+  <dc-import name="NightBackdrop" variant="band" style="position:absolute;inset:0;z-index:-1" hint-size="100%,100%"></dc-import>
+  <div style="max-width:1248px;margin:0 auto;padding:88px 24px 48px">
+<nav aria-label="Breadcrumb" style="padding:20px 0 0">
+    <ol style="list-style:none;margin:0;padding:0;display:flex;gap:8px;font-size:14px;color:#B5B5B5">
+      <li><a href="Home.dc.html" style="color:#B5B5B5">Home</a></li><li aria-hidden="true">/</li>
+      <li aria-current="page" style="color:#FFFFFF;font-weight:500">Routes &amp; Fares</li>
+    </ol>
+  </nav>
+  <header style="padding:24px 0 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:680px">
+      <sc-if value="{{ ann }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">H1 · full table is server-rendered; search only filters rows client-side · SAMPLE fares</span></sc-if>
+      <h1 style="margin:0;font:700 clamp(30px,4vw,52px)/1.08 'Poppins',sans-serif;letter-spacing:-0.02em;color:#FFFFFF">Cab routes and fares from Vadodara</h1>
+      <p style="margin:0;font-size:17px;line-height:1.6">One-way starting fares by car type. Every fare covers your trip only, with no return charge.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;width:min(100%,340px)">
+      <label for="route-search" style="font-size:14px;font-weight:600;color:#FFFFFF">Find a route</label>
+      <div style="position:relative">
+        <qc-icon name="search" size="20" style="color:#6E6E6E;position:absolute;left:14px;top:16px;pointer-events:none"></qc-icon>
+        <input id="route-search" type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="e.g. Surat" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 14px 0 44px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+      </div>
+    </div>
+  </header>
+  </div>
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,187,3,0.6),transparent)"></div>
+</section>
+<main style="max-width:1248px;margin:0 auto;padding:48px 24px clamp(56px,8vw,96px)">
+  
+
+  <section aria-labelledby="out-h" style="display:flex;flex-direction:column;gap:16px">
+    <h2 id="out-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Outstation one-way fares</h2>
+    <div style="overflow-x:auto;border:1px solid #ECECEC;border-radius:16px;background:#FFFFFF">
+      <table style="width:100%;min-width:720px;border-collapse:collapse;font-size:15px">
+        <caption style="text-align:left;padding:14px 20px;font-size:13px;color:#6E6E6E;border-bottom:1px solid #ECECEC">Sample fares in INR, one way from Vadodara.</caption>
+        <thead>
+          <tr style="background:#F7F7F5;text-align:left;color:#6E6E6E;font-size:13px">
+            <th scope="col" style="padding:12px 20px;font-weight:600">Route</th>
+            <th scope="col" style="padding:12px;font-weight:600">Distance</th>
+            <th scope="col" style="padding:12px;font-weight:600">Time</th>
+            <th scope="col" style="padding:12px;font-weight:600">Hatchback</th>
+            <th scope="col" style="padding:12px;font-weight:600">Sedan</th>
+            <th scope="col" style="padding:12px 20px;font-weight:600">SUV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+            <tr style="border-top:1px solid #ECECEC">
+              <th scope="row" style="padding:16px 20px;text-align:left"><a href="{{ r.href }}" style="font-weight:600;color:#1E1E1E;text-decoration-color:#D9D9D9;text-underline-offset:4px" style-hover="text-decoration-color:#1E1E1E">{{ r.title }}</a></th>
+              <td style="padding:16px 12px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.km }} km</td>
+              <td style="padding:16px 12px;white-space:nowrap">{{ r.time }}</td>
+              <td style="padding:16px 12px;font-variant-numeric:tabular-nums">{{ r.h }}</td>
+              <td style="padding:16px 12px;font-weight:700;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ r.from }}</td>
+              <td style="padding:16px 20px;font-variant-numeric:tabular-nums">{{ r.s }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:0;padding:24px 20px;border-top:1px solid #ECECEC">No listed route matches “{{ q }}”. Call <a href="tel:+916356544544">6356-544-544</a> for a fare to any city.</p>
+      </sc-if>
+    </div>
+    <a href="Airport.dc.html" style="align-self:flex-start;font-weight:600;min-height:44px;display:flex;align-items:center;gap:6px">Vadodara airport transfers and fares<qc-icon name="arrow-right" size="18"></qc-icon></a>
+  </section>
+
+  <section id="local" aria-labelledby="local-h" style="display:flex;flex-direction:column;gap:16px;margin-top:64px">
+    <h2 id="local-h" style="margin:0;font:700 clamp(24px,2.6vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Local rental packages in Vadodara</h2>
+    <p style="margin:0;max-width:640px;line-height:1.6">Keep a car and driver for a few hours or the whole day. Extra hours and km are charged at a fixed rate shown when you book.</p>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <sc-for list="{{ pkgs }}" as="p" hint-placeholder-count="3">
+        <li style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:14px">
+          <h3 style="margin:0;font:700 24px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ p.name }}</h3>
+          <dl style="margin:0;display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ p.rows }}" as="x">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding-bottom:8px;border-bottom:1px solid #F0F0F0"><dt>{{ x.car }}</dt><dd style="margin:0;font-weight:700;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ x.fare }}</dd></div>
+            </sc-for>
+          </dl>
+          <a href="{{ p.href }}" style="margin-top:auto;height:48px;border-radius:999px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font-weight:700;text-decoration:none" style-hover="background:#E5A500;color:#1E1E1E">Book {{ p.name }} rental</a>
+        </li>
+      </sc-for>
+    </ul>
+    <span style="font:600 11px ui-monospace,Menlo,monospace;color:#6E6E6E">SAMPLE FARES · client to supply rate card</span>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Developer notes&quot;}}">
+class Component extends DCLogic {
+  state = { q: '' };
+  componentDidMount() { const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t(); }
+  renderVals() {
+    const QC = window.QC, q = this.state.q.trim().toLowerCase();
+    const rows = QC ? QC.routes.filter(r => !q || r.to.toLowerCase().includes(q)).map(r => Object.assign({}, r, { h: QC.inr(r.sedan * 0.88), s: QC.inr(r.sedan * 1.45) })) : [];
+    const pkgs = QC ? [[4, 40, 1199], [8, 80, 1999], [12, 120, 2799]].map(([h, km, b]) => ({
+      name: h + ' hr / ' + km + ' km', href: 'Booking.dc.html?trip=rental&from=Vadodara&to=Local%20' + h + '%20hr',
+      rows: QC.cars.slice(0, 3).map(c => ({ car: c.name, fare: QC.inr(b * c.mult / 0.88) }))
+    })) : [];
+    return { q: this.state.q, onQ: e => this.setState({ q: e.target.value }), rows, empty: QC && !rows.length, pkgs, ann: !!this.props.annotations };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>The Quick Cab Reviews | Vadodara Cab Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+  </style>
+</helmet>
+<dc-import name="SiteHeader" style="position:sticky;top:-24px;z-index:50" active="reviews" hint-size="100%,56px"></dc-import>
+<section style="position:relative;isolation:isolate;background:#161616;color:#D6D6D6;overflow:hidden">
+  <dc-import name="NightBackdrop" variant="band" style="position:absolute;inset:0;z-index:-1" hint-size="100%,100%"></dc-import>
+  <div style="max-width:1248px;margin:0 auto;padding:88px 24px 48px">
+<nav aria-label="Breadcrumb" style="padding:20px 0 0">
+    <ol style="list-style:none;margin:0;padding:0;display:flex;gap:8px;font-size:14px;color:#B5B5B5"><li><a href="Home.dc.html" style="color:#B5B5B5">Home</a></li><li aria-hidden="true">/</li><li aria-current="page" style="color:#FFFFFF;font-weight:500">Reviews</li></ol>
+  </nav>
+  <header style="padding:24px 0 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+      <sc-if value="{{ ann }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;font:600 11px/1 ui-monospace,Menlo,monospace;color:#3A3A3A;background:#FFF6D6;border:1px dashed #3A3A3A;border-radius:6px;padding:5px 8px">H1 · PLACEHOLDER reviews and rating · Review schema only for real reviews</span></sc-if>
+      <h1 style="margin:0;font:700 clamp(30px,4vw,52px)/1.08 'Poppins',sans-serif;letter-spacing:-0.02em;color:#FFFFFF">Reviews from Quick Cab riders</h1>
+      <p style="margin:0;font-size:17px;line-height:1.6">Families, business travellers and airport passengers on their trips with us.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(12px)">
+      <span style="font:700 40px/1 'Poppins',sans-serif;color:#FFFFFF;font-variant-numeric:tabular-nums">4.8</span>
+      <span style="display:flex;flex-direction:column;gap:4px"><span role="img" aria-label="4.8 out of 5 stars" style="display:flex;gap:2px"><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon><qc-icon name="star" size="18" fill="1" style="color:#FFBB03"></qc-icon></span><span style="font-size:13px;color:#B5B5B5">Placeholder · from Google reviews</span></span>
+    </div>
+  </header>
+  </div>
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,187,3,0.6),transparent)"></div>
+</section>
+<main style="max-width:1248px;margin:0 auto;padding:40px 24px clamp(56px,8vw,96px)">
+  
+  <div role="group" aria-label="Filter reviews" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+    <sc-for list="{{ filters }}" as="t" hint-placeholder-count="4">
+      <button type="button" aria-pressed="{{ t.on }}" onClick="{{ t.pick }}" style="height:44px;padding:0 18px;border-radius:10px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};font:600 14px 'Poppins',sans-serif;cursor:pointer">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px">
+    <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="6">
+      <li style="padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:999px;background:#3A3A3A;color:#FFFFFF;display:grid;place-items:center;font:700 16px 'Poppins',sans-serif">{{ r.initial }}</span>
+          <span style="display:flex;flex-direction:column"><h2 style="margin:0;font:700 16px 'Poppins',sans-serif;color:#1E1E1E">{{ r.name }}</h2><span style="font-size:13px;color:#6E6E6E">{{ r.city }}</span></span>
+          <span role="img" aria-label="{{ r.label }}" style="margin-left:auto;display:flex;gap:2px"><sc-for list="{{ r.stars }}" as="s"><qc-icon name="star" size="16" fill="1" style="color:{{ s }}"></qc-icon></sc-for></span>
+        </div>
+        <blockquote style="margin:0;font-size:16px;line-height:1.65;color:#1E1E1E">“{{ r.text }}”</blockquote>
+        <span style="margin-top:auto;align-self:flex-start;font-size:13px;font-weight:600;color:#3A3A3A;background:#F4F4F4;border-radius:999px;padding:6px 12px">{{ r.route }}</span>
+      </li>
+    </sc-for>
+  </ul>
+  <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC">
+    <h2 style="margin:0;font:700 20px 'Poppins',sans-serif;color:#1E1E1E">Travelled with us?</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <a href="#google-review" style="height:48px;padding:0 20px;border-radius:10px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;font-weight:600;text-decoration:none">Write a review on Google</a>
+      <a href="Home.dc.html#book" style="height:48px;padding:0 22px;border-radius:10px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;font-weight:700;text-decoration:none" style-hover="background:#E5A500;color:#1E1E1E">Check Fare</a>
+    </div>
+  </div>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Developer notes&quot;}}">
+class Component extends DCLogic {
+  state = { f: 'All' };
+  componentDidMount() { const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t(); }
+  renderVals() {
+    const QC = window.QC;
+    const kind = r => /Airport/.test(r.route) ? 'Airport' : /Local/.test(r.route) ? 'Local' : 'Outstation';
+    const stars = n => [1, 2, 3, 4, 5].map(i => (i <= n ? '#FFBB03' : '#DDDDDD'));
+    const filters = ['All', 'Outstation', 'Airport', 'Local'].map(label => { const on = this.state.f === label; return { label, on, bg: on ? '#1E1E1E' : '#FFFFFF', color: on ? '#FFFFFF' : '#1E1E1E', border: on ? '#1E1E1E' : '#ECECEC', pick: () => this.setState({ f: label }) }; });
+    const reviews = QC ? QC.reviews.filter(r => this.state.f === 'All' || kind(r) === this.state.f).map(r => Object.assign({}, r, { initial: r.name[0], stars: stars(r.rating), label: r.rating + ' out of 5 stars' })) : [];
+    return { filters, reviews, ann: !!this.props.annotations };
+  }
+}
+</script>
+</body>
+</html>

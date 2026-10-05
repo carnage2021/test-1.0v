@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Choose your cab | The Quick Cab</title>
+  <meta name="robots" content="noindex"></meta>
+  <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"></link>
+  <script src="site-data.js"></script>
+  <style>
+    body{margin:0;background:#F7F7F5;color:#4A4A4A;font-family:'Poppins',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:#3A3A3A}
+    a:hover{color:#1E1E1E}
+    :focus-visible{outline:3px solid #FFBB03;outline-offset:3px;border-radius:8px}
+  </style>
+</helmet>
+<dc-import name="SiteHeader" style="position:sticky;top:-24px;z-index:50" hint-size="100%,56px"></dc-import>
+<main style="max-width:1248px;margin:0 auto;padding:92px 24px clamp(56px,8vw,96px)">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;border-radius:20px;background:radial-gradient(60% 120% at 100% 0%,rgba(255,187,3,0.18),transparent 70%),#161616;color:#D6D6D6;box-shadow:0 20px 50px rgba(22,22,22,0.25)">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0">
+      <span style="font:700 17px 'Poppins',sans-serif;color:#FFFFFF">{{ trip.from }}</span>
+      <span aria-hidden="true" style="width:40px;border-top:2px dashed #444444"></span>
+      <span style="font:700 17px 'Poppins',sans-serif;color:#FFFFFF">{{ trip.to }}</span>
+      <span style="font-size:14px;font-variant-numeric:tabular-nums">· {{ trip.when }} · {{ trip.type }}</span>
+    </div>
+    <a href="Home.dc.html#book" style="height:40px;padding:0 16px;border-radius:10px;border:1px solid #444444;color:#FFFFFF;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;text-decoration:none" style-hover="border-color:#FFBB03;color:#FFFFFF"><qc-icon name="pencil" size="16"></qc-icon>Edit trip</a>
+  </div>
+
+  <ol aria-label="Booking steps" style="list-style:none;margin:24px 0 28px;padding:0;display:flex;gap:8px;flex-wrap:wrap">
+    <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+      <li aria-current="{{ s.current }}" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 6px;border-radius:10px;background:{{ s.bg }};color:{{ s.color }};font-size:14px;font-weight:600">
+        <span style="width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:{{ s.dot }};color:#1E1E1E;font-size:13px;font-weight:700">{{ s.n }}</span>{{ s.label }}
+      </li>
+    </sc-for>
+  </ol>
+
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;gap:24px;align-items:start;grid-template-columns:{{ cols }}">
+      <section aria-labelledby="h1" style="display:flex;flex-direction:column;gap:14px;min-width:0">
+        <h1 id="h1" style="margin:0 0 4px;font:700 clamp(26px,3vw,36px)/1.15 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Pick your car</h1>
+        <div role="radiogroup" aria-labelledby="h1" style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ cars }}" as="c" hint-placeholder-count="4">
+            <button type="button" role="radio" aria-checked="{{ c.on }}" onClick="{{ c.pick }}" style="display:grid;grid-template-columns:{{ carCols }};gap:16px 20px;align-items:center;text-align:left;width:100%;padding:16px;border-radius:16px;background:#FFFFFF;border:2px solid {{ c.border }};cursor:pointer;font:inherit;color:inherit;box-shadow:{{ c.shadow }}" style-hover="border-color:#3A3A3A">
+              <span role="img" aria-label="{{ c.alt }}" style="aspect-ratio:16 / 10;border-radius:10px;background:repeating-linear-gradient(135deg,#F0F0F0 0 8px,#F7F7F5 8px 16px);display:grid;place-items:center;font:500 11px ui-monospace,Menlo,monospace;color:#6E6E6E">{{ c.name }} photo</span>
+              <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <span style="font:700 19px 'Poppins',sans-serif;color:#1E1E1E">{{ c.name }}</span>
+                <span style="font-size:14px;color:#6E6E6E">{{ c.eg }} · AC</span>
+                <span style="display:flex;gap:14px;font-size:14px;font-weight:500;color:#1E1E1E"><span style="display:flex;gap:6px;align-items:center"><qc-icon name="users" size="16" style="color:#6E6E6E"></qc-icon>{{ c.seats }} seats</span><span style="display:flex;gap:6px;align-items:center"><qc-icon name="luggage" size="16" style="color:#6E6E6E"></qc-icon>{{ c.bags }} bags</span></span>
+              </span>
+              <span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+                <span style="font:700 24px/1 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ c.fare }}</span>
+                <span style="font-size:13px;color:#0B7A55;font-weight:600">{{ c.note }}</span>
+                <span style="height:36px;padding:0 14px;border-radius:10px;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;background:{{ c.btnBg }};color:#1E1E1E">{{ c.btn }}</span>
+              </span>
+            </button>
+          </sc-for>
+        </div>
+        <span style="font:600 11px ui-monospace,Menlo,monospace;color:#6E6E6E">SAMPLE FARES · dynamic from fare API</span>
+      </section>
+      <aside aria-label="Fare summary" style="position:sticky;top:96px;padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:16px">
+        <h2 style="margin:0;font:700 18px 'Poppins',sans-serif;color:#1E1E1E">Fare summary</h2>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span>{{ sel.name }}, {{ trip.type }}</span><span style="font:700 28px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ sel.fare }}</span></div>
+        <ul style="list-style:none;margin:0;padding:16px 0 0;border-top:1px solid #ECECEC;display:flex;flex-direction:column;gap:10px;font-size:14px">
+          <sc-for list="{{ included }}" as="i" hint-placeholder-count="5"><li style="display:flex;gap:8px;align-items:center"><qc-icon name="check" size="16" style="color:#0E9F6E"></qc-icon>{{ i.t }}</li></sc-for>
+        </ul>
+        <span style="font:700 11px ui-monospace,Menlo,monospace;color:#B42318">[CONFIRM WITH CLIENT]</span>
+        <button type="button" onClick="{{ toDetails }}" style="height:52px;border-radius:999px;border:0;background:#FFBB03;color:#1E1E1E;font:700 16px 'Poppins',sans-serif;cursor:pointer" style-hover="background:#E5A500">Continue with {{ sel.name }}</button>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;gap:24px;align-items:start;grid-template-columns:{{ cols }}">
+      <form onSubmit="{{ confirm }}" noValidate="{{ true }}" aria-labelledby="h1d" style="padding:clamp(20px,3vw,32px);border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:20px">
+        <h1 id="h1d" style="margin:0;font:700 clamp(26px,3vw,36px)/1.15 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Passenger details</h1>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label for="pd-name" style="font-size:14px;font-weight:600;color:#1E1E1E">Full name</label>
+            <input id="pd-name" autoComplete="name" value="{{ f.name }}" onChange="{{ set.name }}" aria-invalid="{{ e.nameBad }}" style="height:52px;border-radius:12px;border:1.5px solid {{ e.nameB }};padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+            <sc-if value="{{ e.name }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20">{{ e.name }}</p></sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label for="pd-phone" style="font-size:14px;font-weight:600;color:#1E1E1E">Mobile number</label>
+            <div style="display:flex;height:52px;border-radius:12px;border:1.5px solid {{ e.phoneB }};overflow:hidden" style-focus-within="border-color:#3A3A3A">
+              <span style="display:flex;align-items:center;padding:0 12px;background:#F7F7F5;border-right:1px solid #ECECEC;font-weight:600;color:#1E1E1E">+91</span>
+              <input id="pd-phone" type="tel" inputMode="numeric" autoComplete="tel-national" value="{{ f.phone }}" onChange="{{ set.phone }}" aria-invalid="{{ e.phoneBad }}" style="flex:1;min-width:0;border:0;padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none;font-variant-numeric:tabular-nums"></input>
+            </div>
+            <sc-if value="{{ e.phone }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20">{{ e.phone }}</p></sc-if>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label for="pd-email" style="font-size:14px;font-weight:600;color:#1E1E1E">Email <span style="font-weight:400;color:#6E6E6E">(optional, for invoice)</span></label>
+            <input id="pd-email" type="email" autoComplete="email" value="{{ f.email }}" onChange="{{ set.email }}" style="height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label for="pd-flight" style="font-size:14px;font-weight:600;color:#1E1E1E">Flight number <span style="font-weight:400;color:#6E6E6E">(airport pickups)</span></label>
+            <input id="pd-flight" value="{{ f.flight }}" onChange="{{ set.flight }}" style="height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none;text-transform:uppercase" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="pd-pick" style="font-size:14px;font-weight:600;color:#1E1E1E">Pickup address in {{ trip.from }}</label>
+          <input id="pd-pick" autoComplete="street-address" value="{{ f.pick }}" onChange="{{ set.pick }}" aria-invalid="{{ e.pickBad }}" style="height:52px;border-radius:12px;border:1.5px solid {{ e.pickB }};padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+          <sc-if value="{{ e.pick }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20">{{ e.pick }}</p></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="pd-drop" style="font-size:14px;font-weight:600;color:#1E1E1E">Drop address in {{ trip.to }} <span style="font-weight:400;color:#6E6E6E">(optional)</span></label>
+          <input id="pd-drop" value="{{ f.drop }}" onChange="{{ set.drop }}" style="height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+        </div>
+        <fieldset style="border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px">
+          <legend style="font-size:14px;font-weight:600;color:#1E1E1E;margin-bottom:8px">Payment <span style="font:700 11px ui-monospace,Menlo,monospace;color:#B42318;margin-left:6px">[CONFIRM WITH CLIENT]</span></legend>
+          <sc-for list="{{ pays }}" as="p" hint-placeholder-count="2">
+            <label style="display:flex;gap:12px;align-items:center;min-height:56px;padding:0 16px;border-radius:12px;border:2px solid {{ p.border }};cursor:pointer;background:#FFFFFF">
+              <input type="radio" name="pay" checked="{{ p.on }}" onChange="{{ p.pick }}" style="width:20px;height:20px;accent-color:#1E1E1E"></input>
+              <span style="display:flex;flex-direction:column"><span style="font-weight:600;color:#1E1E1E">{{ p.label }}</span><span style="font-size:13px;color:#6E6E6E">{{ p.sub }}</span></span>
+            </label>
+          </sc-for>
+        </fieldset>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+          <button type="submit" disabled="{{ loading }}" style="height:56px;padding:0 32px;border-radius:10px;border:0;background:#FFBB03;color:#1E1E1E;font:700 17px 'Poppins',sans-serif;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#E5A500">{{ confirmText }}</button>
+          <button type="button" onClick="{{ back }}" style="height:56px;padding:0 20px;border-radius:10px;border:0;background:transparent;color:#3A3A3A;font:600 16px 'Poppins',sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:4px">Change car</button>
+        </div>
+        <p style="margin:0;font-size:13px;color:#6E6E6E">By confirming you agree to the <a href="#terms">Terms</a> and <a href="#privacy">Privacy policy</a>.</p>
+      </form>
+      <aside aria-label="Trip summary" style="position:sticky;top:96px;padding:24px;border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font:700 18px 'Poppins',sans-serif;color:#1E1E1E">Your trip</h2>
+        <dl style="margin:0;display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <div style="display:flex;justify-content:space-between;gap:12px"><dt style="color:#6E6E6E">Route</dt><dd style="margin:0;color:#1E1E1E;font-weight:600;text-align:right">{{ trip.from }} → {{ trip.to }}</dd></div>
+          <div style="display:flex;justify-content:space-between;gap:12px"><dt style="color:#6E6E6E">Pickup</dt><dd style="margin:0;color:#1E1E1E;font-weight:600;font-variant-numeric:tabular-nums">{{ trip.when }}</dd></div>
+          <div style="display:flex;justify-content:space-between;gap:12px"><dt style="color:#6E6E6E">Car</dt><dd style="margin:0;color:#1E1E1E;font-weight:600">{{ sel.name }}</dd></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid #ECECEC"><dt style="color:#1E1E1E;font-weight:600">Total</dt><dd style="margin:0;font:700 24px 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ sel.fare }}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="h1c" style="max-width:640px;margin:0 auto;padding:clamp(24px,4vw,40px);border-radius:16px;background:#FFFFFF;border:1px solid #ECECEC;display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+      <span style="width:56px;height:56px;border-radius:999px;background:#E7F6F0;display:grid;place-items:center"><qc-icon name="circle-check" size="30" style="color:#0E9F6E"></qc-icon></span>
+      <h1 id="h1c" style="margin:0;font:700 clamp(26px,3vw,36px)/1.15 'Poppins',sans-serif;letter-spacing:-0.02em;color:#1E1E1E">Booking confirmed</h1>
+      <p style="margin:0;font-size:17px;line-height:1.6">Thanks, {{ firstName }}. Your booking ID is <strong style="color:#1E1E1E;font-variant-numeric:tabular-nums">{{ ref }}</strong>. Driver name, phone and car number reach you on +91 {{ f.phone }} before pickup.</p>
+      <dl style="margin:0;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
+        <div style="padding:14px;border-radius:12px;background:#F7F7F5"><dt style="font-size:13px;color:#6E6E6E">Route</dt><dd style="margin:4px 0 0;font-weight:600;color:#1E1E1E">{{ trip.from }} → {{ trip.to }}</dd></div>
+        <div style="padding:14px;border-radius:12px;background:#F7F7F5"><dt style="font-size:13px;color:#6E6E6E">Pickup</dt><dd style="margin:4px 0 0;font-weight:600;color:#1E1E1E">{{ trip.when }}</dd></div>
+        <div style="padding:14px;border-radius:12px;background:#F7F7F5"><dt style="font-size:13px;color:#6E6E6E">{{ sel.name }}</dt><dd style="margin:4px 0 0;font-weight:700;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ sel.fare }}</dd></div>
+      </dl>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a href="https://wa.me/916356544544" style="height:52px;padding:0 20px;border-radius:10px;background:#1E1E1E;color:#FFFFFF;display:flex;align-items:center;gap:8px;font-weight:600;text-decoration:none"><qc-icon name="message-circle" size="18"></qc-icon>Get updates on WhatsApp</a>
+        <a href="Home.dc.html" style="height:52px;padding:0 20px;border-radius:10px;border:1.5px solid #1E1E1E;color:#1E1E1E;display:flex;align-items:center;font-weight:600;text-decoration:none">Back to home</a>
+      </div>
+    </section>
+  </sc-if>
+</main>
+<dc-import name="SiteFooter" hide-bar="{{ true }}" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;step&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;results&quot;,&quot;details&quot;,&quot;done&quot;],&quot;default&quot;:&quot;results&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Preview state&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const u = new URLSearchParams(location.search);
+    this.state = { w: window.innerWidth, step: (p && p.step) || 'results', car: u.get('car') || 'Sedan', pay: 'driver', f: { name: '', phone: '', email: '', flight: '', pick: '', drop: '' }, errs: {}, loading: false,
+      trip: { tripType: u.get('trip') || 'oneway', from: u.get('from') || 'Vadodara', to: u.get('to') || 'Ahmedabad', date: u.get('date') || '', time: u.get('time') || '09:00' } };
+  }
+  componentDidMount() {
+    const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t();
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+  }
+  componentDidUpdate(prev) { if (prev.step !== this.props.step && this.props.step) this.setState({ step: this.props.step }); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const QC = window.QC, s = this.state, T = s.trip;
+    const wide = s.w >= 980;
+    const typeLbl = { oneway: 'One way', round: 'Round trip', rental: 'Rental' }[T.tripType];
+    const d = T.date ? new Date(T.date + 'T' + T.time) : new Date(Date.now() + 864e5);
+    const when = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) + ', ' + T.time;
+    const other = T.from === 'Vadodara' ? T.to : T.from;
+    const route = QC && QC.routes.find(r => r.to === other);
+    const base = route ? route.sedan : 2499;
+    const mult = T.tripType === 'round' ? 1.75 : 1;
+    const cars = QC ? QC.cars.map(c => {
+      const on = c.name === s.car;
+      return Object.assign({}, c, { on, fare: QC.inr(base * c.mult * mult), note: T.tripType === 'oneway' ? 'No return fare' : 'All-inclusive', alt: 'Quick Cab ' + c.name,
+        border: on ? '#1E1E1E' : '#ECECEC', shadow: on ? '0 8px 24px rgba(20,20,20,0.10)' : 'none', btn: on ? 'Selected' : 'Select', btnBg: on ? '#FFBB03' : '#F4F4F4',
+        pick: () => this.setState({ car: c.name }) });
+    }) : [];
+    const sel = cars.find(c => c.on) || cars[1] || {};
+    const order = ['results', 'details', 'done'];
+    const idx = order.indexOf(s.step);
+    const steps = ['Choose car', 'Your details', 'Confirmed'].map((label, i) => ({ n: i < idx ? '✓' : i + 1, label, current: i === idx ? 'step' : undefined,
+      bg: i === idx ? '#FFFFFF' : 'transparent', color: i <= idx ? '#1E1E1E' : '#6E6E6E', dot: i <= idx ? '#FFBB03' : '#ECECEC' }));
+    const setF = k => ev => { const v = ev.target.value; this.setState(st => ({ f: Object.assign({}, st.f, { [k]: k === 'phone' ? v.replace(/\D/g, '').slice(0, 10) : v }), errs: Object.assign({}, st.errs, { [k]: null }) })); };
+    const E = s.errs;
+    const e = { name: E.name, nameBad: !!E.name, nameB: E.name ? '#D92D20' : '#ECECEC', phone: E.phone, phoneBad: !!E.phone, phoneB: E.phone ? '#D92D20' : '#ECECEC', pick: E.pick, pickBad: !!E.pick, pickB: E.pick ? '#D92D20' : '#ECECEC' };
+    const confirm = ev => {
+      ev.preventDefault();
+      const f = s.f, errs = {};
+      if (!f.name.trim()) errs.name = 'Enter your name';
+      if (f.phone.length !== 10) errs.phone = 'Enter a 10-digit mobile number';
+      if (!f.pick.trim()) errs.pick = 'Enter a pickup address';
+      this.setState({ errs });
+      if (Object.keys(errs).length) return;
+      this.setState({ loading: true });
+      setTimeout(() => { this.setState({ loading: false, step: 'done' }); window.scrollTo(0, 0); }, 900);
+    };
+    const pays = [['online', 'Pay online now', 'UPI, card or net banking'], ['driver', 'Pay the driver', 'UPI or cash after the trip']].map(([id, label, sub]) => ({ label, sub, on: s.pay === id, border: s.pay === id ? '#1E1E1E' : '#ECECEC', pick: () => this.setState({ pay: id }) }));
+    return {
+      trip: { from: T.from, to: T.to, when, type: typeLbl }, steps, cars, sel, included: QC ? QC.included.slice(0, 5) : [],
+      cols: wide ? 'minmax(0,1fr) 360px' : 'minmax(0,1fr)', carCols: s.w >= 640 ? '150px minmax(0,1fr) auto' : '96px minmax(0,1fr)',
+      isResults: s.step === 'results', isDetails: s.step === 'details', isDone: s.step === 'done',
+      toDetails: () => { this.setState({ step: 'details' }); window.scrollTo(0, 0); }, back: () => this.setState({ step: 'results' }),
+      f: s.f, set: { name: setF('name'), phone: setF('phone'), email: setF('email'), flight: setF('flight'), pick: setF('pick'), drop: setF('drop') }, e,
+      pays, confirm, loading: s.loading, confirmText: s.loading ? 'Confirming…' : 'Confirm booking · ' + (sel.fare || ''),
+      firstName: (s.f.name.split(' ')[0] || 'there'), ref: 'QC-' + d.getFullYear().toString().slice(2) + '-48213'
+    };
+  }
+}
+</script>
+</body>
+</html>

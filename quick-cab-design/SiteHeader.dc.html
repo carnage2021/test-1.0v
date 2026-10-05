@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header id="top" style="position:relative;height:56px;overflow:visible;background:#1E1E1E;font-family:'Poppins',system-ui,sans-serif;pointer-events:none">
+  <div style="background:#1E1E1E;pointer-events:auto">
+    <div style="max-width:1248px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;gap:28px;font-size:14px;color:#E6E6E6">
+      <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+        <a href="tel:+916356544544" style="display:flex;align-items:center;gap:8px;color:#E6E6E6;text-decoration:none;font-variant-numeric:tabular-nums" style-hover="color:#FFBB03"><qc-icon name="phone" size="15" style="color:#FFBB03"></qc-icon>6356-544-544</a>
+        <a href="mailto:info@thequickcab.com" style="display:flex;align-items:center;gap:8px;color:#E6E6E6;text-decoration:none" style-hover="color:#FFBB03"><qc-icon name="mail" size="15" style="color:#FFBB03"></qc-icon>info@thequickcab.com</a>
+        <span style="display:flex;align-items:center;gap:8px"><qc-icon name="map-pin" size="15" style="color:#FFBB03"></qc-icon>Vadodara, Gujarat · 24x7</span>
+        <span style="flex:1"></span>
+        <div style="display:flex;gap:8px">
+          <a href="#facebook" aria-label="Facebook" style="width:34px;height:34px;border-radius:8px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center" style-hover="background:#FFFFFF;color:#1E1E1E"><qc-icon name="facebook" size="16"></qc-icon></a>
+          <a href="#instagram" aria-label="Instagram" style="width:34px;height:34px;border-radius:8px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center" style-hover="background:#FFFFFF;color:#1E1E1E"><qc-icon name="instagram" size="16"></qc-icon></a>
+          <a href="#youtube" aria-label="YouTube" style="width:34px;height:34px;border-radius:8px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center" style-hover="background:#FFFFFF;color:#1E1E1E"><qc-icon name="youtube" size="16"></qc-icon></a>
+          <a href="https://wa.me/916356544544" aria-label="WhatsApp" style="width:34px;height:34px;border-radius:8px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center" style-hover="background:#FFFFFF;color:#1E1E1E"><qc-icon name="message-circle" size="16"></qc-icon></a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+        <a href="tel:+916356544544" style="display:flex;align-items:center;gap:8px;color:#E6E6E6;text-decoration:none;font-variant-numeric:tabular-nums"><qc-icon name="phone" size="15" style="color:#FFBB03"></qc-icon>6356-544-544</a>
+        <span style="margin-left:auto;display:flex;align-items:center;gap:6px"><span style="width:7px;height:7px;border-radius:999px;background:#2FD49A"></span>24x7</span>
+      </sc-if>
+    </div>
+  </div>
+  <div style="position:relative;max-width:1248px;margin:0 auto;padding:0 {{ cardPad }};margin-top:-22px;pointer-events:auto">
+    <div style="background:#FFFFFF;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,0.18);padding:10px 12px 10px 10px;display:flex;align-items:center;gap:20px;min-height:68px">
+      <a href="Home.dc.html" aria-label="The Quick Cab – home" style="display:flex;flex:none">
+        <img src="assets/quick-cab-logo.png" width="104" height="51" alt="The Quick Cab – Intercity Expert" style="display:block;width:104px;height:51px;border-radius:10px"></img>
+      </a>
+      <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="display:flex;gap:2px;align-items:center;flex:1;justify-content:center">
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="7">
+            <a href="{{ l.href }}" aria-current="{{ l.current }}" style="padding:10px 12px;border-radius:8px;font-size:15px;font-weight:500;color:{{ l.color }};text-decoration:none;white-space:nowrap" style-hover="color:#C98A00">{{ l.label }}</a>
+          </sc-for>
+        </nav>
+        <a href="#login" style="height:44px;display:flex;align-items:center;padding:0 12px;color:#1E1E1E;font-weight:500;font-size:15px;text-decoration:none" style-hover="color:#C98A00">Login</a>
+        <a href="Home.dc.html#book" style="height:48px;padding:0 24px;border-radius:10px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap" style-hover="background:#1E1E1E;color:#FFFFFF">Book Now</a>
+      </sc-if>
+      <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <a href="tel:+916356544544" aria-label="Call 6356-544-544" style="width:46px;height:46px;border-radius:10px;background:#FFBB03;color:#1E1E1E;display:grid;place-items:center"><qc-icon name="phone" size="20"></qc-icon></a>
+          <button type="button" aria-label="{{ menuLabel }}" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}" style="width:46px;height:46px;border-radius:10px;border:0;background:#1E1E1E;color:#FFFFFF;display:grid;place-items:center;cursor:pointer"><qc-icon name="{{ menuIcon }}" size="20"></qc-icon></button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ showDrawer }}" hint-placeholder-val="{{ false }}">
+      <nav aria-label="Main" style="position:absolute;left:{{ cardPad }};right:{{ cardPad }};top:100%;margin-top:8px;background:#FFFFFF;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,0.18);padding:8px 20px 20px;display:flex;flex-direction:column">
+        <sc-for list="{{ links }}" as="l">
+          <a href="{{ l.href }}" style="min-height:52px;display:flex;align-items:center;border-bottom:1px solid #F0F0F0;color:#1E1E1E;font-weight:500;font-size:17px;text-decoration:none">{{ l.label }}</a>
+        </sc-for>
+        <a href="#login" style="min-height:52px;display:flex;align-items:center;color:#1E1E1E;font-weight:500;font-size:17px;text-decoration:none">Login</a>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+          <a href="tel:+916356544544" style="height:52px;border-radius:10px;background:#FFBB03;color:#1E1E1E;display:flex;align-items:center;justify-content:center;font-weight:600;text-decoration:none">Call now</a>
+          <a href="https://wa.me/916356544544" style="height:52px;border-radius:10px;background:#1E1E1E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:600;text-decoration:none">WhatsApp</a>
+        </div>
+      </nav>
+    </sc-if>
+  </div>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;140px&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;book&quot;,&quot;routes&quot;,&quot;local&quot;,&quot;reviews&quot;,&quot;why&quot;,&quot;faq&quot;,&quot;contact&quot;,&quot;&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { w: window.innerWidth, menuOpen: false, ov: 46 };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const active = this.props.active || '';
+    const raw = [
+      ['book', 'Book One Way', 'Home.dc.html#book'], ['routes', 'Routes & Fares', 'Routes.dc.html'],
+      ['local', 'Local Packages', 'Routes.dc.html#local'], ['reviews', 'Reviews', 'Reviews.dc.html'],
+      ['why', 'Why Us', 'Home.dc.html#why'], ['faq', 'FAQ', 'FAQ.dc.html'], ['contact', 'Contact', '#contact']
+    ];
+    const links = raw.map(([id, label, href]) => ({ label, href, current: id === active ? 'page' : undefined, color: id === active ? '#C98A00' : '#1E1E1E' }));
+    const desktop = this.state.w >= 1240;
+    const barH = desktop ? '64px' : '34px';
+    return {
+      links, desktop, mobile: !desktop, barH, stickTop: desktop ? '-42px' : '-12px', cardPad: this.state.w < 600 ? '12px' : '24px',
+      menuOpen: this.state.menuOpen, showDrawer: !desktop && this.state.menuOpen,
+      menuLabel: this.state.menuOpen ? 'Close menu' : 'Open menu', menuIcon: this.state.menuOpen ? 'x' : 'menu',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

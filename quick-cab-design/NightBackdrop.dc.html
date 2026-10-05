@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit;background:#161616">{{ art }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;720px&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;hero&quot;,&quot;band&quot;,&quot;cta&quot;,&quot;mini&quot;],&quot;default&quot;:&quot;hero&quot;,&quot;tsType&quot;:&quot;'hero'|'band'|'cta'|'mini'&quot;},&quot;still&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;noChips&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { w: window.innerWidth };
+  componentDidMount() {
+    if (!document.getElementById('qc-kf')) {
+      const s = document.createElement('style'); s.id = 'qc-kf';
+      s.textContent = '@keyframes qcComet{from{stroke-dashoffset:0}to{stroke-dashoffset:-1000}}@keyframes qcFlow{to{stroke-dashoffset:-110}}@keyframes qcPulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(5);opacity:0}}@keyframes qcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes qcTrail{0%{transform:translateX(-45%);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateX(45%);opacity:0}}@keyframes qcBreath{0%,100%{opacity:.7}50%{opacity:1}}@media (prefers-reduced-motion: reduce){.qc-anim{animation:none!important}}';
+      document.head.appendChild(s);
+    }
+    this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const h = React.createElement, v = this.props.variant || 'hero', still = !!this.props.still, w = this.state.w;
+    const A = (val) => (still ? 'none' : val);
+    const C = {
+      hero: { par: 'xMidYMax slice', hub: [720, 900], hubPin: false, k: 0.16,
+        cities: [['Ahmedabad', 170, 95], ['Gandhinagar', 360, 60], ['Rajkot', 90, 470], ['Dwarka', 120, 700], ['Udaipur', 1130, 70], ['Indore', 1330, 135, 1], ['Statue of Unity', 1290, 470, 1], ['Surat', 1350, 620, 1], ['Mumbai', 1300, 780, 1]],
+        links: [[0, 1], [0, 2], [2, 3], [4, 5], [6, 7], [7, 8]], trails: true,
+        glow: 'radial-gradient(55% 45% at 50% 100%, rgba(255,187,3,0.22), transparent 70%), radial-gradient(40% 45% at 8% 0%, rgba(110,110,110,0.40), transparent 70%), radial-gradient(35% 40% at 96% 18%, rgba(110,110,110,0.30), transparent 70%)',
+        veil: 'radial-gradient(42% 34% at 50% 34%, rgba(22,22,22,0.78), transparent 100%)' },
+      band: { par: 'xMaxYMid slice', hub: [1120, 430], hubPin: 'Vadodara', k: 0.14,
+        cities: [['Ahmedabad', 930, 300], ['Statue of Unity', 1330, 330, 1], ['Surat', 1310, 540, 1], ['Rajkot', 860, 500], ['Mumbai', 1180, 600]],
+        links: [[0, 3]], trails: false,
+        glow: 'radial-gradient(40% 70% at 78% 50%, rgba(255,187,3,0.16), transparent 70%), radial-gradient(40% 80% at 0% 0%, rgba(110,110,110,0.35), transparent 70%)',
+        veil: 'linear-gradient(90deg, rgba(22,22,22,0.95) 0%, rgba(22,22,22,0.7) 45%, rgba(22,22,22,0) 75%)' },
+      cta: { par: 'xMidYMid slice', hub: [720, 410], hubPin: false, k: 0.12,
+        cities: [['', 120, 220], ['', 260, 600], ['', 90, 420], ['', 1320, 200, 1], ['', 1180, 620, 1], ['', 1360, 430, 1]],
+        links: [[0, 2], [3, 5]], trails: true,
+        glow: 'radial-gradient(40% 60% at 50% 50%, rgba(255,187,3,0.18), transparent 70%), radial-gradient(40% 60% at 0% 100%, rgba(110,110,110,0.35), transparent 70%), radial-gradient(40% 60% at 100% 0%, rgba(110,110,110,0.30), transparent 70%)',
+        veil: 'radial-gradient(38% 45% at 50% 50%, rgba(22,22,22,0.75), transparent 100%)' },
+      mini: { par: 'xMidYMid slice', hub: [260, 640], hubPin: false, k: 0.2,
+        cities: [['', 1180, 220, 1]], links: [], trails: false, bigPins: true,
+        glow: 'radial-gradient(60% 60% at 100% 0%, rgba(255,187,3,0.22), transparent 70%), radial-gradient(60% 60% at 0% 100%, rgba(110,110,110,0.45), transparent 70%)',
+        veil: 'linear-gradient(0deg, rgba(22,22,22,0.85) 0%, rgba(22,22,22,0.2) 60%)' }
+    }[v] || {};
+    const curve = (a, b, k) => { const [x1, y1] = a, [x2, y2] = b; const cx = (x1 + x2) / 2 + (y2 - y1) * k, cy = (y1 + y2) / 2 - (x2 - x1) * k; return 'M' + x1 + ' ' + y1 + ' Q' + cx + ' ' + cy + ' ' + x2 + ' ' + y2; };
+    const els = [];
+    els.push(h('defs', { key: 'd' },
+      h('pattern', { id: 'qcg-' + v, width: 48, height: 48, patternUnits: 'userSpaceOnUse' }, h('path', { d: 'M48 0H0V48', fill: 'none', stroke: 'rgba(255,255,255,0.045)', strokeWidth: 1 })),
+      h('radialGradient', { id: 'qcm-' + v, cx: '50%', cy: '50%', r: '60%' }, h('stop', { offset: '0%', stopColor: '#fff', stopOpacity: 1 }), h('stop', { offset: '100%', stopColor: '#fff', stopOpacity: 0 })),
+      h('mask', { id: 'qcmask-' + v }, h('rect', { width: 1440, height: 820, fill: 'url(#qcm-' + v + ')' })),
+      h('linearGradient', { id: 'qct-' + v, x1: 0, x2: 1, y1: 0, y2: 0 }, h('stop', { offset: '0', stopColor: '#FFBB03', stopOpacity: 0 }), h('stop', { offset: '0.5', stopColor: '#FFD45C', stopOpacity: 0.9 }), h('stop', { offset: '1', stopColor: '#FFBB03', stopOpacity: 0 })),
+      h('filter', { id: 'qcglow-' + v, x: '-50%', y: '-50%', width: '200%', height: '200%' }, h('feGaussianBlur', { stdDeviation: 3, result: 'b' }), h('feMerge', null, h('feMergeNode', { in: 'b' }), h('feMergeNode', { in: 'SourceGraphic' })))
+    ));
+    els.push(h('rect', { key: 'g', width: 1440, height: 820, fill: 'url(#qcg-' + v + ')', mask: 'url(#qcmask-' + v + ')' }));
+    const cities = C.cities || [];
+    (C.links || []).forEach(([a, b], i) => {
+      const d = curve(cities[a].slice(1, 3), cities[b].slice(1, 3), 0.1);
+      els.push(h('path', { key: 'l' + i, d, fill: 'none', stroke: 'rgba(255,255,255,0.16)', strokeWidth: 1.2, strokeDasharray: '2 9', strokeLinecap: 'round' }));
+    });
+    cities.forEach((c, i) => {
+      const d = curve(C.hub, [c[1], c[2]], (i % 2 ? -1 : 1) * C.k);
+      const dur = (4.5 + (i % 4) * 0.9).toFixed(1) + 's', delay = (-(i * 1.3)).toFixed(1) + 's';
+      els.push(h('path', { key: 'b' + i, d, fill: 'none', stroke: 'rgba(255,255,255,0.10)', strokeWidth: 1.2 }));
+      els.push(h('path', { key: 'f' + i, className: 'qc-anim', d, fill: 'none', stroke: 'rgba(255,187,3,0.38)', strokeWidth: 1.8, strokeDasharray: '1 10', strokeLinecap: 'round', style: { animation: A('qcFlow 6s linear infinite') } }));
+      els.push(h('path', { key: 'c' + i, className: 'qc-anim', d, fill: 'none', pathLength: 1000, stroke: '#FFD45C', strokeWidth: C.bigPins ? 4 : 2.6, strokeLinecap: 'round', strokeDasharray: '70 930', filter: 'url(#qcglow-' + v + ')', style: { animation: A('qcComet ' + dur + ' cubic-bezier(.45,.05,.55,.95) ' + delay + ' infinite'), opacity: still ? 0 : 1 } }));
+    });
+    const pin = (x, y, key, label, end, big) => {
+      const r = big ? 7 : 4;
+      const g = [
+        h('circle', { key: 'p', className: 'qc-anim', cx: x, cy: y, r, fill: 'none', stroke: '#FFBB03', strokeWidth: 1.5, style: { transformBox: 'fill-box', transformOrigin: 'center', animation: A('qcPulse 2.8s ease-out ' + (-(key.length % 5) * 0.5) + 's infinite') } }),
+        h('circle', { key: 'h', cx: x, cy: y, r: r + 5, fill: 'rgba(255,187,3,0.18)' }),
+        h('circle', { key: 'c', cx: x, cy: y, r, fill: '#FFBB03', filter: 'url(#qcglow-' + v + ')' })
+      ];
+      if (label && (w >= 900 || v === 'band')) g.push(h('text', { key: 't', x: end ? x - 14 : x + 14, y: y + 5, textAnchor: end ? 'end' : 'start', fill: 'rgba(255,255,255,0.62)', style: { font: '500 14px Poppins, sans-serif', letterSpacing: '0.02em' } }, label));
+      return h('g', { key }, g);
+    };
+    cities.forEach((c, i) => els.push(pin(c[1], c[2], 'pin' + i + c[0], c[0], c[3], C.bigPins)));
+    if (C.bigPins) els.push(pin(C.hub[0], C.hub[1], 'hubmini', '', false, true));
+    if (C.hubPin) {
+      els.push(h('circle', { key: 'hubhalo', cx: C.hub[0], cy: C.hub[1], r: 26, fill: 'rgba(255,187,3,0.12)' }));
+      els.push(pin(C.hub[0], C.hub[1], 'hub', '', false, true));
+      els.push(h('text', { key: 'hubt', x: C.hub[0] + 20, y: C.hub[1] - 16, fill: '#FFFFFF', style: { font: '700 15px Poppins, sans-serif' } }, C.hubPin));
+    }
+    if (C.trails) [[690, 0, 9], [740, -3, 12], [780, -6, 10.5], [640, -8, 14]].forEach(([y, d, s], i) => {
+      els.push(h('g', { key: 'tr' + i, transform: 'rotate(-7 720 ' + y + ')' }, h('rect', { className: 'qc-anim', x: 120, y, width: 1200, height: i % 2 ? 1.2 : 2, rx: 1, fill: 'url(#qct-' + v + ')', style: { animation: A('qcTrail ' + s + 's linear ' + d + 's infinite'), opacity: still ? 0.5 : undefined } })));
+    });
+    const layers = [
+      h('div', { key: 'glow', className: 'qc-anim', style: { position: 'absolute', inset: 0, background: C.glow, animation: A('qcBreath 8s ease-in-out infinite') } }),
+      h('svg', { key: 'svg', viewBox: '0 0 1440 820', preserveAspectRatio: C.par, style: { position: 'absolute', inset: 0, width: '100%', height: '100%' } }, els),
+      h('div', { key: 'veil', style: { position: 'absolute', inset: 0, background: C.veil } })
+    ];
+    if (v === 'hero' && w >= 1360 && !this.props.noChips) {
+      const chips = [
+        ['calendar-check', 'Since 2016', 'Gujarat roads, 10 years', { left: '3%', top: '22%' }],
+        ['clock', '24x7 service', 'Day and night pickups', { left: '5.5%', top: '40%' }],
+        ['snowflake', 'AC cars', 'Hatchback to Tempo', { right: '3%', top: '24%' }],
+        ['user-check', 'Experienced drivers', 'Intercity specialists', { right: '5%', top: '42%' }]
+      ];
+      chips.forEach(([icon, t, s, pos], i) => layers.push(h('div', { key: 'chip' + i, className: 'qc-anim', style: Object.assign({ position: 'absolute', display: 'flex', alignItems: 'center', gap: 12, padding: '10px 18px 10px 10px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', boxShadow: '0 20px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)', animation: A('qcFloat ' + (6 + i) + 's ease-in-out ' + (-i * 1.5) + 's infinite') }, pos) },
+        h('span', { style: { width: 36, height: 36, borderRadius: 999, background: '#FFBB03', color: '#1E1E1E', display: 'grid', placeItems: 'center', boxShadow: '0 0 20px rgba(255,187,3,0.45)' } }, h('qc-icon', { name: icon, size: '18' })),
+        h('span', { style: { display: 'flex', flexDirection: 'column', lineHeight: 1.25 } }, h('span', { style: { font: '700 15px Poppins, sans-serif', color: '#FFFFFF' } }, t), h('span', { style: { font: '500 12px Poppins, sans-serif', color: 'rgba(255,255,255,0.65)' } }, s))
+      )));
+    }
+    return { art: layers };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<form id="{{ uid }}" onSubmit="{{ submit }}" noValidate="{{ true }}" aria-label="Check cab fare" style="background:#FFFFFF;border:1px solid #ECECEC;border-radius:16px;box-shadow:0 12px 40px rgba(20,20,20,0.08),0 2px 6px rgba(20,20,20,0.04);padding:20px;display:flex;flex-direction:column;gap:18px;font-family:'Poppins',system-ui,sans-serif;color:#4A4A4A;text-align:left">
+  <div role="tablist" aria-label="Trip type" style="display:flex;gap:4px;background:#F4F4F4;border-radius:12px;padding:4px;align-self:flex-start;max-width:100%;overflow-x:auto">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+      <button type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="height:40px;padding:0 18px;border-radius:10px;border:0;cursor:pointer;font:600 14px/1 'Poppins',sans-serif;white-space:nowrap;background:{{ t.bg }};color:{{ t.color }};box-shadow:{{ t.shadow }}">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ minCol }},1fr));gap:14px 12px;align-items:start">
+    <div style="position:relative;display:flex;flex-direction:column;gap:6px;min-width:0">
+      <label for="{{ idFrom }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Pickup city</label>
+      <div style="position:relative">
+        <qc-icon name="map-pin" size="20" style="color:#6E6E6E;position:absolute;left:14px;top:16px;pointer-events:none"></qc-icon>
+        <input id="{{ idFrom }}" type="text" autoComplete="off" role="combobox" aria-autocomplete="list" aria-expanded="{{ fromOpen }}" aria-invalid="{{ fromInvalid }}" placeholder="Type a city" value="{{ fromQ }}" onChange="{{ onFromChange }}" onFocus="{{ onFromFocus }}" onBlur="{{ onFromBlur }}" onKeyDown="{{ onFromKey }}" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid {{ fromBorder }};padding:0 14px 0 44px;font:500 16px/1 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+      </div>
+      <sc-if value="{{ fromOpen }}" hint-placeholder-val="{{ false }}">
+        <div role="listbox" aria-label="Pickup city suggestions" style="position:absolute;top:84px;left:0;right:0;z-index:30;background:#FFFFFF;border:1px solid #ECECEC;border-radius:12px;box-shadow:0 16px 40px rgba(20,20,20,0.14);padding:6px;max-height:280px;overflow:auto">
+          <sc-for list="{{ fromItems }}" as="it">
+            <button type="button" role="option" onMouseDown="{{ it.pick }}" style="width:100%;min-height:48px;display:flex;align-items:center;gap:10px;padding:0 12px;border:0;background:transparent;border-radius:8px;cursor:pointer;font:500 15px 'Poppins',sans-serif;color:#1E1E1E;text-align:left" style-hover="background:#F4F4F4">
+              <span style="flex:1">{{ it.label }}</span><span style="font-size:12px;color:#6E6E6E">{{ it.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ fromErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20">{{ fromErr }}</p></sc-if>
+    </div>
+    <sc-if value="{{ notRental }}" hint-placeholder-val="{{ true }}">
+      <div style="position:relative;display:flex;flex-direction:column;gap:6px;min-width:0">
+        <label for="{{ idTo }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Drop city</label>
+        <div style="position:relative">
+          <qc-icon name="navigation" size="20" style="color:#6E6E6E;position:absolute;left:14px;top:16px;pointer-events:none"></qc-icon>
+          <input id="{{ idTo }}" type="text" autoComplete="off" role="combobox" aria-autocomplete="list" aria-expanded="{{ toOpen }}" aria-invalid="{{ toInvalid }}" placeholder="Type a city" value="{{ toQ }}" onChange="{{ onToChange }}" onFocus="{{ onToFocus }}" onBlur="{{ onToBlur }}" onKeyDown="{{ onToKey }}" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid {{ toBorder }};padding:0 14px 0 44px;font:500 16px/1 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF;outline:none" style-focus="border-color:#3A3A3A;box-shadow:0 0 0 4px rgba(255,187,3,0.14)"></input>
+        </div>
+        <sc-if value="{{ toOpen }}" hint-placeholder-val="{{ false }}">
+          <div role="listbox" aria-label="Drop city suggestions" style="position:absolute;top:84px;left:0;right:0;z-index:30;background:#FFFFFF;border:1px solid #ECECEC;border-radius:12px;box-shadow:0 16px 40px rgba(20,20,20,0.14);padding:6px;max-height:280px;overflow:auto">
+            <sc-for list="{{ toItems }}" as="it">
+              <button type="button" role="option" onMouseDown="{{ it.pick }}" style="width:100%;min-height:48px;display:flex;align-items:center;gap:10px;padding:0 12px;border:0;background:transparent;border-radius:8px;cursor:pointer;font:500 15px 'Poppins',sans-serif;color:#1E1E1E;text-align:left" style-hover="background:#F4F4F4">
+                <span style="flex:1">{{ it.label }}</span><span style="font-size:12px;color:#6E6E6E">{{ it.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ toErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20">{{ toErr }}</p></sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isRental }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+        <label for="{{ idPkg }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Package</label>
+        <select id="{{ idPkg }}" value="{{ pkg }}" onChange="{{ onPkg }}" style="width:100%;height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 14px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF">
+          <option value="4">4 hr / 40 km</option><option value="8">8 hr / 80 km</option><option value="12">12 hr / 120 km</option>
+        </select>
+      </div>
+    </sc-if>
+    <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;min-width:0">
+      <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+        <label for="{{ idDate }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Date</label>
+        <input id="{{ idDate }}" type="date" min="{{ today }}" value="{{ date }}" onChange="{{ onDate }}" aria-invalid="{{ dateInvalid }}" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid {{ dateBorder }};padding:0 12px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF;font-variant-numeric:tabular-nums"></input>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+        <label for="{{ idTime }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Time</label>
+        <input id="{{ idTime }}" type="time" value="{{ time }}" onChange="{{ onTime }}" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 12px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF;font-variant-numeric:tabular-nums"></input>
+      </div>
+      <sc-if value="{{ dateErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;font-size:14px;color:#D92D20;grid-column:1 / -1">{{ dateErr }}</p></sc-if>
+    </div>
+    <sc-if value="{{ isRound }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+        <label for="{{ idRet }}" style="font-size:14px;font-weight:600;color:#1E1E1E">Return date</label>
+        <input id="{{ idRet }}" type="date" min="{{ date }}" value="{{ ret }}" onChange="{{ onRet }}" style="width:100%;box-sizing:border-box;height:52px;border-radius:12px;border:1.5px solid #ECECEC;padding:0 12px;font:500 16px 'Poppins',sans-serif;color:#1E1E1E;background:#FFFFFF"></input>
+      </div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+      <span aria-hidden="true" style="font-size:14px;line-height:21px;visibility:{{ btnLabelVis }}">&#8203;</span>
+      <button type="submit" disabled="{{ loading }}" style="height:52px;border-radius:999px;border:0;background:#FFBB03;color:#1E1E1E;font:700 16px/1 'Poppins',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-shadow:0 6px 16px rgba(229,165,0,0.28)" style-hover="background:#E5A500">
+        <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}"><qc-icon name="loader-circle" size="18" style="color:currentColor"></qc-icon></sc-if>
+        {{ btnText }}
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ preview }}" hint-placeholder-val="{{ false }}">
+    <div aria-live="polite" style="border-radius:12px;background:#F7F7F5;border:1px solid #ECECEC;padding:16px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center">
+      <div style="display:flex;align-items:center;gap:10px;flex:1 1 240px;min-width:0">
+        <span style="width:10px;height:10px;border-radius:999px;background:#1E1E1E;flex:none"></span>
+        <span style="font-weight:600;color:#1E1E1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ preview.from }}</span>
+        <span style="flex:1;min-width:24px;border-top:2px dashed #C4C4C4"></span>
+        <span style="width:10px;height:10px;border-radius:999px;background:#FFBB03;box-shadow:0 0 0 2px #1E1E1E;flex:none"></span>
+        <span style="font-weight:600;color:#1E1E1E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ preview.to }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:13px;color:#6E6E6E">{{ preview.meta }}</span>
+        <span style="font:700 22px/1.2 'Poppins',sans-serif;color:#1E1E1E;font-variant-numeric:tabular-nums">{{ preview.fare }} <span style="font:500 13px 'Poppins',sans-serif;color:#6E6E6E">{{ preview.unit }}</span></span>
+      </div>
+      <span style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0B7A55;flex-basis:100%">
+        <qc-icon name="circle-check" size="16" style="color:#0E9F6E"></qc-icon>{{ preview.note }}
+      </span>
+    </div>
+  </sc-if>
+</form>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;480px&quot;,&quot;height&quot;:&quot;620px&quot;},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;card&quot;,&quot;bar&quot;],&quot;default&quot;:&quot;card&quot;,&quot;tsType&quot;:&quot;'card'|'bar'&quot;},&quot;from&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Vadodara&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;to&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;oneway&quot;,&quot;round&quot;,&quot;rental&quot;],&quot;default&quot;:&quot;oneway&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;cta&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Check Fare&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;uid&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;bw&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const pr = p || {};
+    const d = new Date(Date.now() + 864e5);
+    this.state = { tab: pr.tab || 'oneway', fromQ: pr.from || '', from: pr.from || '', toQ: pr.to || '', to: pr.to || '', open: null, date: d.toISOString().slice(0, 10), time: '09:00', ret: '', pkg: '8', errs: {}, loading: false };
+  }
+  componentDidUpdate(prev) {
+    ['from', 'to'].forEach(f => { if (this.props[f] && this.props[f] !== prev[f] && !this.state[f]) this.setState({ [f]: this.props[f], [f + 'Q']: this.props[f] }); });
+  }
+  componentDidMount() { const t = () => window.QC ? this.forceUpdate() : setTimeout(t, 40); t(); }
+  items(q, other) {
+    const QC = window.QC; if (!QC) return [];
+    const mk = (c, sub) => ({ label: c, sub, city: c });
+    let list;
+    if (!q.trim()) list = [mk('Vadodara', 'Recent')].concat(QC.cities.slice(1, 7).map(c => mk(c, 'Popular')));
+    else list = QC.cities.filter(c => c.toLowerCase().includes(q.trim().toLowerCase())).slice(0, 7).map(c => mk(c, ''));
+    if (!list.length) list = [{ label: 'No match. Call 6356-544-544 for other cities', sub: '', city: null }];
+    return list.filter(i => i.city !== other);
+  }
+  pick(field, city) {
+    if (!city) return;
+    this.setState(s => ({ [field + 'Q']: city, [field]: city, open: null, errs: Object.assign({}, s.errs, { [field]: null, same: null }) }));
+  }
+  field(f) {
+    const QC = window.QC;
+    const s = this.state;
+    const other = f === 'from' ? s.to : s.from;
+    const items = this.items(s[f + 'Q'], other).map(i => Object.assign({}, i, { pick: e => { e.preventDefault(); this.pick(f, i.city); } }));
+    const err = s.errs[f] || (f === 'to' ? s.errs.same : null);
+    return {
+      items, open: s.open === f, err, border: err ? '#D92D20' : '#ECECEC',
+      onChange: e => { const v = e.target.value; const m = QC && QC.cities.find(c => c.toLowerCase() === v.trim().toLowerCase()); this.setState({ [f + 'Q']: v, [f]: m || '', open: f }); },
+      onFocus: () => this.setState({ open: f }),
+      onBlur: () => setTimeout(() => this.setState(st => (st.open === f ? { open: null } : null)), 120),
+      onKey: e => { if (e.key === 'Escape') this.setState({ open: null }); if (e.key === 'Enter' && s.open === f) { e.preventDefault(); this.pick(f, items[0] && items[0].city); } }
+    };
+  }
+  lookup(a, b) {
+    const QC = window.QC; if (!QC || !a || !b) return null;
+    const other = a === 'Vadodara' ? b : b === 'Vadodara' ? a : null;
+    return other ? QC.routes.find(r => r.to === other) : null;
+  }
+  renderVals() {
+    const s = this.state, QC = window.QC, uid = this.props.uid || 'bw';
+    const F = this.field('from'), T = this.field('to');
+    const rental = s.tab === 'rental', round = s.tab === 'round';
+    const tabs = [['oneway', 'One Way'], ['round', 'Round Trip'], ['rental', 'Rental']].map(([id, label]) => ({
+      label, on: s.tab === id, bg: s.tab === id ? '#FFFFFF' : 'transparent', color: s.tab === id ? '#1E1E1E' : '#6E6E6E',
+      shadow: s.tab === id ? '0 1px 3px rgba(20,20,20,0.12)' : 'none', pick: () => this.setState({ tab: id, errs: {} })
+    }));
+    let preview = null;
+    if (rental && s.from && QC) {
+      const base = { 4: 1199, 8: 1999, 12: 2799 }[s.pkg];
+      preview = { from: s.from, to: 'Local, ' + s.pkg + ' hr', meta: 'Hatchback · sample fare', fare: QC.inr(base), unit: 'from', note: 'Extra km and hours charged at a fixed rate' };
+    } else if (!rental && s.from && s.to && s.from !== s.to) {
+      const r = this.lookup(s.from, s.to);
+      preview = r
+        ? { from: s.from, to: s.to, meta: r.km + ' km · about ' + r.time + ' · Sedan', fare: round ? QC.inr(r.sedan * 1.75) : r.from, unit: round ? 'round trip, sample' : 'one way, sample', note: round ? 'Driver stays with you until the return' : 'Pay for one way only. No return fare.' }
+        : { from: s.from, to: s.to, meta: 'Fare for this route', fare: 'On the next step', unit: '', note: 'Pay for one way only. No return fare.' };
+    }
+    const submit = e => {
+      e.preventDefault();
+      const errs = {};
+      if (!s.from) errs.from = s.fromQ ? 'Choose a city from the list' : 'Enter a pickup city';
+      if (!rental && !s.to) errs.to = s.toQ ? 'Choose a city from the list' : 'Enter a drop city';
+      if (!rental && s.from && s.from === s.to) errs.same = 'Pickup and drop city can’t be the same';
+      if (!s.date) errs.date = 'Pick a travel date';
+      this.setState({ errs, open: null });
+      if (Object.keys(errs).length) return;
+      this.setState({ loading: true });
+      const q = new URLSearchParams({ trip: s.tab, from: s.from, to: rental ? 'Local ' + s.pkg + ' hr' : s.to, date: s.date, time: s.time });
+      setTimeout(() => { window.location.href = 'Booking.dc.html?' + q.toString(); }, 700);
+    };
+    const card = (this.props.layout || 'card') === 'card';
+    return {
+      uid, idFrom: uid + '-from', idTo: uid + '-to', idDate: uid + '-date', idTime: uid + '-time', idRet: uid + '-ret', idPkg: uid + '-pkg',
+      tabs, minCol: card ? '100%' : '210px', btnLabelVis: card ? 'collapse' : 'hidden',
+      fromQ: s.fromQ, fromOpen: F.open, fromItems: F.items, fromErr: F.err, fromBorder: F.border, fromInvalid: !!F.err,
+      onFromChange: F.onChange, onFromFocus: F.onFocus, onFromBlur: F.onBlur, onFromKey: F.onKey,
+      toQ: s.toQ, toOpen: T.open, toItems: T.items, toErr: T.err, toBorder: T.border, toInvalid: !!T.err,
+      onToChange: T.onChange, onToFocus: T.onFocus, onToBlur: T.onBlur, onToKey: T.onKey,
+      notRental: !rental, isRental: rental, isRound: round, pkg: s.pkg, onPkg: e => this.setState({ pkg: e.target.value }),
+      today: new Date().toISOString().slice(0, 10), date: s.date, time: s.time, ret: s.ret,
+      onDate: e => this.setState({ date: e.target.value, errs: Object.assign({}, s.errs, { date: null }) }),
+      onTime: e => this.setState({ time: e.target.value }), onRet: e => this.setState({ ret: e.target.value }),
+      dateErr: s.errs.date, dateInvalid: !!s.errs.date, dateBorder: s.errs.date ? '#D92D20' : '#ECECEC',
+      loading: s.loading, btnText: s.loading ? 'Checking fares…' : (this.props.cta || 'Check Fare'),
+      preview, submit
+    };
+  }
+}
+</script>
+</body>
+</html>
